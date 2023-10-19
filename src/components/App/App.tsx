@@ -1,7 +1,11 @@
+import React from 'react';
+import { Fragment } from 'react';
+import Header from '@components/Header/Header';
+
 const App = () => (
-  <>
-    <h1>LetsMeet</h1>
-  </>
+  <Fragment>
+    <Header />
+  </Fragment>
 );
 
 export default App;
