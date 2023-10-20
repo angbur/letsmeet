@@ -17,8 +17,6 @@ const NavButton = styled(ListItemButton)({
 });
 
 const Circle = styled(CircleIcon)({
-  width: '10px',
-  height: '10px',
   paddingRight: '0.75rem',
   color: 'black',
 });
@@ -37,7 +35,7 @@ const Navigation = () => {
   return (
     <Box
       sx={{
-        backgroundColor: palette.secondary.main,
+        backgroundColor: palette.secondary.light,
         padding: '0.75rem',
         marginTop: '2px',
         borderRadius: '16px',
@@ -52,7 +50,7 @@ const Navigation = () => {
         {Object.keys(routes).map((route) => (
           <NavLink key={route} to={routes[route]} style={{ textDecoration: 'none' }}>
             <NavButton selected={routes[route] === pathname}>
-              <Circle />
+              <Circle fontSize="small" />
               <Typography variant="h6">{navigationLabels[route]}</Typography>
             </NavButton>
           </NavLink>
@@ -65,7 +63,7 @@ const Navigation = () => {
       <List sx={{ padding: 0, gap: 0 }}>
         {supportLabels.map((item) => (
           <NavButton key={item}>
-            <Circle />
+            <Circle fontSize="small" />
             <Typography variant="h6">{item}</Typography>
           </NavButton>
         ))}

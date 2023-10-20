@@ -24,8 +24,8 @@ const theme = createTheme({
       contrastText: '#FFFFFF',
     },
     secondary: {
-      main: '#EADDFF',
-      light: '#E8DEF8',
+      main: '#E8DEF8',
+      light: '#F3EDF7',
       contrastText: '#FFFFFF',
     },
     tertiary: {
@@ -45,7 +45,7 @@ const theme = createTheme({
       secondary: '#49454F',
     },
     background: {
-      default: '#FFFBFE',
+      default: '#FFF',
       paper: '#FFFFFF',
     },
   },
@@ -57,6 +57,13 @@ const theme = createTheme({
       fontSize: '1.6rem',
       fontFamily: 'Anton, sans-serif',
       color: '#000',
+      fontWeight: 400,
+      lineHeight: '125%',
+    },
+    h2: {
+      fontSize: '2rem',
+      fontFamily: 'Roboto, sans-serif',
+      color: '#000',
       fontWeight: 700,
       lineHeight: '127.273%',
     },
@@ -64,6 +71,22 @@ const theme = createTheme({
       fontSize: '0.8rem',
       fontFamily: 'Roboto, sans-serif',
       color: '#000',
+    },
+  },
+  components: {
+    MuiButton: {
+      defaultProps: {
+        disableElevation: true,
+        variant: 'contained',
+      },
+      styleOverrides: {
+        root: {
+          borderRadius: '100px',
+          textTransform: 'none',
+          fontFamily: 'Roboto, sans-serif',
+          padding: '0.625rem 1.5rem',
+        },
+      },
     },
   },
 });
