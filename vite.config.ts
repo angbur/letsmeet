@@ -8,6 +8,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@components': '/src/components',
+      '@store': '/src/store',
+      '@services': '/src/services',
     },
   },
   base: './',
