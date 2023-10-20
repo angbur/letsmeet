@@ -88,6 +88,26 @@ const theme = createTheme({
         },
       },
     },
+    MuiListItemButton: {
+      defaultProps: {
+        disableRipple: true,
+      },
+      styleOverrides: {
+        root: {
+          padding: '1rem',
+          borderRadius: '100px',
+          margin: 0,
+        },
+      },
+    },
+    MuiList: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+          gap: 0,
+        },
+      },
+    },
   },
 });
 

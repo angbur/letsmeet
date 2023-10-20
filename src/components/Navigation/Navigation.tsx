@@ -8,13 +8,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import CircleIcon from '@mui/icons-material/Circle';
 import Divider from '@mui/material/Divider';
 import routes from '@components/App/routing/routes';
-import { NavLink, useLocation } from 'react-router-dom';
-
-const NavButton = styled(ListItemButton)({
-  padding: '1rem',
-  borderRadius: '100px',
-  margin: 0,
-});
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Circle = styled(CircleIcon)({
   paddingRight: '0.75rem',
@@ -24,6 +18,7 @@ const Circle = styled(CircleIcon)({
 const Navigation = () => {
   const { palette } = useTheme();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const navigationLabels = {
     homepage: 'Home page',
     newAgenda: 'Add new agenda',
@@ -46,26 +41,47 @@ const Navigation = () => {
       <Typography variant="h6" sx={{ padding: '1.125rem 1rem' }}>
         Navigation
       </Typography>
-      <List sx={{ padding: 0, gap: 0 }}>
+      <List
+        sx={{
+          '&& .Mui-selected, && .Mui-selected:hover': {
+            bgcolor: palette.secondary.main,
+          },
+          '& .MuiListItemButton-root:hover': {
+            bgcolor: `${palette.secondary.main}70`,
+          },
+        }}
+      >
         {Object.keys(routes).map((route) => (
-          <NavLink key={route} to={routes[route]} style={{ textDecoration: 'none' }}>
-            <NavButton selected={routes[route] === pathname}>
-              <Circle />
-              <Typography variant="h6">{navigationLabels[route]}</Typography>
-            </NavButton>
-          </NavLink>
+          <ListItemButton
+            selected={routes[route] === pathname}
+            onClick={() => navigate(routes[route])}
+            key={route}
+            disableRipple
+          >
+            <Circle />
+            <Typography variant="h6">{navigationLabels[route]}</Typography>
+          </ListItemButton>
         ))}
       </List>
       <Divider sx={{ marginTop: '0.5rem' }} />
       <Typography variant="h6" sx={{ padding: '1.125rem 1rem' }}>
         Support
       </Typography>
-      <List sx={{ padding: 0, gap: 0 }}>
+      <List
+        sx={{
+          '&& .Mui-selected, && .Mui-selected:hover': {
+            bgcolor: palette.secondary.main,
+          },
+          '& .MuiListItemButton-root:hover': {
+            bgcolor: `${palette.secondary.main}70`,
+          },
+        }}
+      >
         {supportLabels.map((item) => (
-          <NavButton key={item}>
+          <ListItemButton key={item}>
             <Circle />
             <Typography variant="h6">{item}</Typography>
-          </NavButton>
+          </ListItemButton>
         ))}
       </List>
     </Box>
