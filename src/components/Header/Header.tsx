@@ -14,7 +14,7 @@ const Header = () => {
     <AppBar position="static" sx={{ backgroundColor: palette.secondary.light }} elevation={0}>
       <Toolbar sx={{ justifyContent: 'space-between' }}>
         <Box display="flex" alignItems="center" justifyContent="center">
-          <img src="/assets/images/cap_logo_black.svg" alt="Capgemini logo" height={24} />
+          <img src="/assets/images/cap_logo_standard.svg" alt="Capgemini logo" height={64} />
         </Box>
         <Box display="flex" justifyContent="center" alignItems="center" gap="0.5rem">
           <img src="/assets/icons/logo_icon.svg" alt="" height={36} />

@@ -2,12 +2,14 @@ import { combineReducers, configureStore, PreloadedState } from '@reduxjs/toolki
 import userReducer from '@store/userSlice';
 import agendaReducer from '@store/agendaSlice';
 import timeblockReducer from '@store/timeblockSlice';
+import createAgendaReducer from '@store/createAgendaSlice';
 import { userApi } from '@services/user/user';
 import { agendaApi } from '@services/agenda/agenda';
 import { timeblockApi } from '@services/timeblock/timeblock';
 
 export const rootReducer = combineReducers({
   agenda: agendaReducer,
+  createAgenda: createAgendaReducer,
   timeblock: timeblockReducer,
   user: userReducer,
   [userApi.reducerPath]: userApi.reducer,
