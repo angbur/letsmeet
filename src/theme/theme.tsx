@@ -50,17 +50,19 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'Roboto, sans-serif',
+    fontFamily: 'Roboto, Anton, sans-serif',
     fontWeightRegular: 400,
     fontWeightMedium: 500,
     h1: {
       fontSize: '1.6rem',
+      fontFamily: 'Anton, sans-serif',
       color: '#000',
       fontWeight: 700,
       lineHeight: '127.273%',
     },
     h6: {
       fontSize: '0.8rem',
+      fontFamily: 'Roboto, sans-serif',
       color: '#000',
     },
   },

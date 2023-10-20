@@ -14,9 +14,12 @@ const Header = () => {
     <AppBar position="static" color="secondary">
       <Toolbar sx={{ justifyContent: 'space-between' }}>
         <Box display="flex" alignItems="center" justifyContent="center">
-          <img src="/assets/images/Capgemini_Logo_standard.svg" alt="Capgemini logo" height={64} />
+          <img src="/assets/images/cap_logo_black.svg" alt="Capgemini logo" height={24} />
         </Box>
-        <Typography variant="h1">Let&apos;s Meet</Typography>
+        <Box display="flex" justifyContent="center" alignItems="center" gap="0.5rem">
+          <img src="/assets/icons/logo_icon.svg" alt="" height={36} />
+          <Typography variant="h1">let&apos;s meet</Typography>
+        </Box>
         <Box display="flex" justifyContent="center" alignItems="center">
           <Typography variant="h6" component="div">
             Logged as Ania Kowalska
