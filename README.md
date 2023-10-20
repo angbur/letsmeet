@@ -48,7 +48,7 @@ We've crafted a user-friendly tool that aims to make event planning a breeze.
    ```bash
     npm run dev
     ```
-3. **Explore and enjoy:**
+3. **Explore and enjoy**
 
 ## What Does It Accomplish?
 
