@@ -24,8 +24,8 @@ const theme = createTheme({
       contrastText: '#FFFFFF',
     },
     secondary: {
-      main: '#EADDFF',
-      light: '#E8DEF8',
+      main: '#E8DEF8',
+      light: '#F3EDF7',
       contrastText: '#FFFFFF',
     },
     tertiary: {
@@ -45,7 +45,7 @@ const theme = createTheme({
       secondary: '#49454F',
     },
     background: {
-      default: '#FFFBFE',
+      default: '#FFF',
       paper: '#FFFFFF',
     },
   },

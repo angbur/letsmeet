@@ -35,7 +35,7 @@ const Navigation = () => {
   return (
     <Box
       sx={{
-        backgroundColor: palette.secondary.main,
+        backgroundColor: palette.secondary.light,
         padding: '0.75rem',
         marginTop: '2px',
         borderRadius: '16px',

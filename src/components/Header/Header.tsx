@@ -11,7 +11,7 @@ const Header = () => {
   const { palette } = useTheme();
 
   return (
-    <AppBar position="static" color="secondary" elevation={0}>
+    <AppBar position="static" sx={{ backgroundColor: palette.secondary.light }} elevation={0}>
       <Toolbar sx={{ justifyContent: 'space-between' }}>
         <Box display="flex" alignItems="center" justifyContent="center">
           <img src="/assets/images/cap_logo_black.svg" alt="Capgemini logo" height={24} />
