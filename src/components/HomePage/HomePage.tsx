@@ -5,16 +5,24 @@ import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
 import AgendaList from '@components/Agenda/AgendaList/AgendaList';
+import { useNavigate } from 'react-router-dom';
+import routes from '@components/App/routing/routes';
 
-const HomePage = () => (
-  <Box display="flex" style={{ gap: '3.125rem' }}>
-    <Navigation />
-    <Box display="flex" flexDirection="column" alignItems="start" sx={{ gap: '1.5rem' }}>
-      <Button startIcon={<AddIcon />}>Add new agenda</Button>
-      <Typography variant="h2">My recent agendas</Typography>
-      <AgendaList numberOfAgendas={5} />
+const HomePage = () => {
+  const navigate = useNavigate();
+
+  return (
+    <Box display="flex" style={{ gap: '3.125rem' }}>
+      <Navigation />
+      <Box display="flex" flexDirection="column" alignItems="start" sx={{ gap: '1.5rem' }}>
+        <Button startIcon={<AddIcon />} onClick={() => navigate(routes.newAgenda)}>
+          Add new agenda
+        </Button>
+        <Typography variant="h2">My recent agendas</Typography>
+        <AgendaList numberOfAgendas={5} />
+      </Box>
     </Box>
-  </Box>
-);
+  );
+};
 
 export default HomePage;
