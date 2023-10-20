@@ -8,7 +8,9 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
     "paths": {
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@store/*": ["src/store/*"],
+      "@services/*": ["src/services/*"],
     },
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "../vite.config.ts"]
