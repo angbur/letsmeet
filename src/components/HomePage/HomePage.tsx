@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import AgendaList from '@components/Agenda/AgendaList/AgendaList';
 
 const HomePage = () => (
-  <Box display="flex" style={{ marginTop: '2.563rem', gap: '3.125rem' }}>
+  <Box display="flex" style={{ gap: '3.125rem' }}>
     <Navigation />
     <Box display="flex" flexDirection="column" alignItems="start" sx={{ gap: '1.5rem' }}>
       <Button startIcon={<AddIcon />}>Add new agenda</Button>
