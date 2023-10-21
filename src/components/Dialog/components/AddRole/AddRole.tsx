@@ -107,7 +107,7 @@ const AddRole = ({ role = 'owner' }: AddRoleProps) => {
         <Button variant="text" onClick={handleClose}>
           Cancel
         </Button>
-        <Button variant="text" onClick={handleClose}>
+        <Button variant="text" onClick={handleClose} disabled={users.length === 0}>
           Add
         </Button>
       </DialogActions>
