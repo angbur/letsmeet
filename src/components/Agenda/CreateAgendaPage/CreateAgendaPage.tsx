@@ -41,7 +41,7 @@ const CreateAgendaPage = () => {
           <Button>Save as draft</Button>
         </Box>
       </Box>
-      <Box display="flex" sx={{ gap: '2rem' }}>
+      <Box display="flex" sx={{ gap: '2rem' }} alignItems="baseline">
         <AgendaNavigation />
         <CreateAgendaContent />
       </Box>

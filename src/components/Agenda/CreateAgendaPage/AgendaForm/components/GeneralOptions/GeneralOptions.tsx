@@ -22,7 +22,7 @@ const GeneralOptions = () => {
   const [startDate, setStartDate] = useState<Moment | null>(moment(new Date()));
   const [endDate, setEndDate] = useState<Moment | null>(moment(new Date()));
   const [german, setGerman] = useState<boolean>(true);
-  const [polish, setPolish] = useState<boolean>(false);
+  const [polish, setPolish] = useState<boolean>(true);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value === 'german') {
@@ -68,7 +68,7 @@ const GeneralOptions = () => {
           id="event-name-field"
           label="Name of the event"
           helperText="Max. 80 characters"
-          defaultValue="Insert event name here"
+          placeholder="Insert event name here"
           required
           sx={{ width: '80%' }}
         />
@@ -78,7 +78,7 @@ const GeneralOptions = () => {
           required
           multiline
           rows={4}
-          defaultValue="Insert description here"
+          placeholder="Insert description here"
           helperText={'Max. 140 characters'}
           sx={{ width: '80%' }}
         />
@@ -99,7 +99,12 @@ const GeneralOptions = () => {
       <Box display={'flex'} gap={'1rem'} mb={8}>
         <LocalizationProvider dateAdapter={AdapterMoment}>
           <Box display={'flex'} flexDirection={'column'}>
-            <DatePicker label="Start date" value={startDate} onChange={(newValue) => setStartDate(newValue)} />
+            <DatePicker
+              label="Start date"
+              format="DD/MM/YYYY"
+              value={startDate}
+              onChange={(newValue) => setStartDate(newValue)}
+            />
             <Typography variant="caption" color={palette.dark.main} py={0.5} px={2}>
               DD/MM/YYYY
             </Typography>
@@ -107,7 +112,12 @@ const GeneralOptions = () => {
         </LocalizationProvider>
         <LocalizationProvider dateAdapter={AdapterMoment}>
           <Box display={'flex'} flexDirection={'column'}>
-            <DatePicker label="End date" value={endDate} onChange={(newValue) => setEndDate(newValue)} />
+            <DatePicker
+              label="End date"
+              format="DD/MM/YYYY"
+              value={endDate}
+              onChange={(newValue) => setEndDate(newValue)}
+            />
             <Typography variant="caption" color={palette.dark.main} py={0.5} px={2}>
               DD/MM/YYYY
             </Typography>
@@ -151,7 +161,7 @@ const GeneralOptions = () => {
           Privacy
         </StyledFormSectionTitle>
         <FormControlLabel
-          control={<Checkbox defaultChecked />}
+          control={<Checkbox />}
           label="Hide this agenda from the ‘All agendas’ list. Agenda will be seen only by the ownera and co-org."
         />
       </Box>
@@ -187,7 +197,7 @@ const StyledSwitch = styled((props: SwitchProps) => (
       transform: 'translateX(16px)',
       color: '#fff',
       '& + .MuiSwitch-track': {
-        backgroundColor: theme.palette.mode === 'dark' ? theme.palette.primary.main : theme.palette.primary.light,
+        backgroundColor: theme.palette.mode === 'dark' ? theme.palette.primary.main : theme.palette.primary.main,
         opacity: 1,
         border: 0,
       },

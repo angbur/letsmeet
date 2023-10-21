@@ -80,6 +80,13 @@ const theme = createTheme({
       fontWeight: 400,
       lineHeight: '133.333%',
     },
+    h4: {
+      fontSize: '1rem',
+      fontFamily: 'Roboto, sans-serif',
+      color: '#000',
+      fontWeight: 400,
+      lineHeight: '150%',
+    },
     h5: {
       fontSize: '0.875rem',
       fontFamily: 'Roboto, sans-serif',
