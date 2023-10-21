@@ -37,6 +37,10 @@ const theme = createTheme({
       main: '#B3261E',
       contrastText: '#FFFFFF',
     },
+    success: {
+      main: '#20A645',
+      contrastText: '#FFFFFF',
+    },
     dark: {
       main: '#49454F',
     },
@@ -105,6 +109,14 @@ const theme = createTheme({
         root: {
           padding: 0,
           gap: 0,
+        },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          borderBottom: 'none',
+          padding: '6px',
         },
       },
     },
