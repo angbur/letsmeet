@@ -31,7 +31,13 @@ const ThemeCard = ({ themeName, themeImage, applied, handleAppliedTheme }: Theme
           {themeName.charAt(0).toUpperCase() + themeName.slice(1)}
         </Typography>
       </CardHeader>
-      <CardMedia sx={{ height: '125px' }} image={`/assets/images/themes/${themeImage}`} title={themeName}></CardMedia>
+      <CardMedia
+        sx={{ height: '125px' }}
+        image={`/assets/images/themes/${themeImage}`}
+        title={themeName}
+        component="img"
+        loading="lazy"
+      ></CardMedia>
       <CardActions sx={{ padding: '1rem', justifyContent: 'flex-end' }}>
         <Button variant="outlined">Preview</Button>
         <Button disabled={applied} onClick={() => handleAppliedTheme(themeName)}>
