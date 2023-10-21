@@ -31,17 +31,17 @@ const AgendaAccesses = () => {
 
   const handleDeleteOwner = (userId: string) => {
     const newOwners = owners.filter((owner) => owner.id !== userId);
-    setOwners([...newOwners]);
+    setOwners(newOwners);
   };
 
   const handleDeleteCoorg = (userId: string) => {
     const newCoorgs = coorgs.filter((coorg) => coorg.id !== userId);
-    setCoorgs([...newCoorgs]);
+    setCoorgs(newCoorgs);
   };
 
   const handleDeleteViewer = (userId: string) => {
     const newViewers = viewers.filter((viewer) => viewer.id !== userId);
-    setViewers([...newViewers]);
+    setViewers(newViewers);
   };
 
   return (
