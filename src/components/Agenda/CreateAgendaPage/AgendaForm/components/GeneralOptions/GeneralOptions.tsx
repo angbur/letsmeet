@@ -170,6 +170,7 @@ export const StyledFormSectionTitle = styled(Typography)<Pick<Theme, 'palette'>>
   textTransform: 'uppercase',
   width: '100%',
   borderTop: `1px solid ${palette.dark.main}`,
+  paddingTop: '0.5rem',
 }));
 
 const StyledSwitch = styled((props: SwitchProps) => (

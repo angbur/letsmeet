@@ -3,6 +3,7 @@ import userReducer from '@store/userSlice';
 import agendaReducer from '@store/agendaSlice';
 import timeblockReducer from '@store/timeblockSlice';
 import createAgendaReducer from '@store/createAgendaSlice';
+import dialogReducer from '@store/dialogSlice';
 import { userApi } from '@services/user/user';
 import { agendaApi } from '@services/agenda/agenda';
 import { timeblockApi } from '@services/timeblock/timeblock';
@@ -12,6 +13,7 @@ export const rootReducer = combineReducers({
   createAgenda: createAgendaReducer,
   timeblock: timeblockReducer,
   user: userReducer,
+  dialog: dialogReducer,
   [userApi.reducerPath]: userApi.reducer,
   [agendaApi.reducerPath]: agendaApi.reducer,
   [timeblockApi.reducerPath]: timeblockApi.reducer,
