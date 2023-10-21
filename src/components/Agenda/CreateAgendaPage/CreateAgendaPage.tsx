@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import routes from '@components/App/routing/routes';
 import Typography from '@mui/material/Typography';
 import AgendaNavigation from './AgendaNavigation/AgendaNavigation';
-import AgendaForm from './AgendaForm/AgendaForm';
+import CreateAgendaContent from './CreateAgendaContent/CreateAgendaContent';
 
 const CreateAgendaPage = () => {
   const navigate = useNavigate();
@@ -37,9 +37,9 @@ const CreateAgendaPage = () => {
           <Button>Save as draft</Button>
         </Box>
       </Box>
-      <Box display="flex" sx={{ gap: '6rem' }}>
+      <Box display="flex" sx={{ gap: '2rem' }}>
         <AgendaNavigation />
-        <AgendaForm />
+        <CreateAgendaContent />
       </Box>
     </div>
   );

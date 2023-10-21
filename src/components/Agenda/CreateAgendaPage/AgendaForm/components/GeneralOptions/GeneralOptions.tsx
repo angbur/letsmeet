@@ -161,7 +161,7 @@ const GeneralOptions = () => {
 
 export default GeneralOptions;
 
-const StyledFormSectionTitle = styled(Typography)<Pick<Theme, 'palette'>>(({ palette }) => ({
+export const StyledFormSectionTitle = styled(Typography)<Pick<Theme, 'palette'>>(({ palette }) => ({
   color: palette.dark.main,
   fontSize: '0.9rem',
   fontWeight: 500,
