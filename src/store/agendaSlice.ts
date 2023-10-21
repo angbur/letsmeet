@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { agendaApi } from 'src/services/agenda/agenda';
 
-const visits = ['conference', 'meeting', 'event', 'hackathon', 'workshops', 'other'] as const;
+export const visits = ['conference', 'meeting', 'event', 'hackathon', 'workshops', 'other'] as const;
 
 type VisitType = (typeof visits)[number];
 
