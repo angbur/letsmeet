@@ -5,7 +5,7 @@ import { styled } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import getDialogContentComponent from './dialogUtils';
-import CircularProgress from '@mui/material/CircularProgress';
+// import CircularProgress from '@mui/material/CircularProgress';
 
 const StyledDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiPaper-root': {
@@ -27,9 +27,7 @@ const MainDialog = () => {
         <DialogContent>
           <DialogContentComponent />
         </DialogContent>
-      ) : (
-        <CircularProgress color="primary" />
-      )}
+      ) : null}
     </StyledDialog>
   );
 };
