@@ -8,9 +8,11 @@ import HomePage from '@components/HomePage/HomePage';
 import CreateAgendaPage from '@components/Agenda/CreateAgendaPage/CreateAgendaPage';
 import AllAgendasPage from '@components/Agenda/AllAgendasPage/AllAgendasPage';
 import MyAgendasPage from '@components/Agenda/MyAgendasPage/MyAgendasPage';
+import MainDialog from '@components/Dialog/MainDialog';
 
 const App = () => (
   <Fragment>
+    <MainDialog />
     <Header />
     <Box sx={{ padding: '3.188rem 1.5rem 1.5rem' }}>
       <Routes>

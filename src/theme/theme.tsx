@@ -64,7 +64,7 @@ const theme = createTheme({
       fontSize: '2rem',
       fontFamily: 'Roboto, sans-serif',
       color: '#000',
-      fontWeight: 700,
+      fontWeight: 400,
       lineHeight: '127.273%',
     },
     h6: {

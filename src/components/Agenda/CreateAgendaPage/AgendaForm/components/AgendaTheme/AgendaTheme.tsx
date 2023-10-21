@@ -37,4 +37,5 @@ export const StyledFormSectionTitle = styled(Typography)<Pick<Theme, 'palette'>>
   width: '100%',
   borderTop: `1px solid ${palette.dark.main}`,
   textTransform: 'uppercase',
+  paddingTop: '0.5rem',
 }));
