@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './store';
 
-export const dialogsTypes = ['createTimeblock', 'addRole'] as const;
+export const dialogsTypes = ['createTimeblock', 'addRole', 'deleteAgenda'] as const;
 export type DialogType = (typeof dialogsTypes)[number];
 
 type DialogState = {

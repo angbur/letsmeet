@@ -7,9 +7,13 @@ import routes from '@components/App/routing/routes';
 import Typography from '@mui/material/Typography';
 import AgendaNavigation from './AgendaNavigation/AgendaNavigation';
 import CreateAgendaContent from './CreateAgendaContent/CreateAgendaContent';
+import { useDispatch } from 'react-redux';
+import { openDialog } from '@store/dialogSlice';
 
 const CreateAgendaPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleDeleteAgenda = () => dispatch(openDialog('deleteAgenda'));
 
   return (
     <div>
@@ -30,7 +34,7 @@ const CreateAgendaPage = () => {
       >
         <Typography variant="h2">Create new agenda</Typography>
         <Box display="flex" sx={{ gap: '0.75rem' }}>
-          <Button variant="text" sx={{ padding: '0.75rem' }}>
+          <Button variant="text" sx={{ padding: '0.75rem' }} onClick={handleDeleteAgenda}>
             Delete
           </Button>
           <Button variant="outlined">Publish</Button>
