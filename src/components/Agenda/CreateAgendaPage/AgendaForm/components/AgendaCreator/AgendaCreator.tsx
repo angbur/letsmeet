@@ -10,8 +10,22 @@ import { useTheme } from '@mui/material/styles';
 import styled from '@mui/material/styles/styled';
 import TextField from '@mui/material/TextField';
 import type { Theme } from '@mui/material/styles';
+import TimeblockElement from './components/TimeblockElement/TimeblockElement';
+import { Typography } from '@mui/material';
 
-const displayedHours: string[] = ['Work hours (8:00 - 17:00)', 'All day (0:00 - 24:00)'] as const;
+const mockTimeblock = {
+  id: '423568790-8765435678-7865-timeblock-6',
+  title: 'Ship IT Hackathon - Welcome Breakfast',
+  description: 'Welcome breakfast and T-shirts distribution',
+  location: 'Location 1',
+  agenda_id: '423568790-8765435678-7865',
+  start_time: '2023-10-23T08:30:00.000Z',
+  duration: 60,
+  type: 'other',
+  presenter_id: '45678',
+};
+
+const displayedHours: string[] = ['Work hours (8:00 - 17:00)', 'All day (0:00 - 24:00)'];
 type DisplayedHours = (typeof displayedHours)[number];
 
 const AgendaCreator = () => {
@@ -97,9 +111,18 @@ const generateHourGrid = ({ palette, hourRange }: GenerateHorGridProps) => {
 
   for (let i = startHour; i < endHour; i++) {
     hours.push(
-      <Box key={i} display="flex" alignItems="center" gap="4px" width="100%">
-        <Box width="100%" sx={{ borderTop: '1px solid #ccc', height: '100px', color: `${palette.dark.main}` }}>
-          {i}:00
+      <Box key={i} display="flex" alignItems="center" gap="4px" width="100%" flexDirection="column">
+        <Box width="100%" sx={{ borderTop: '1px solid #ccc', minHeight: '100px', color: `${palette.dark.main}` }}>
+          <Typography
+            variant="caption"
+            color="dark"
+            fontWeight={600}
+            fontSize={'0.8rem'}
+            sx={{ position: 'relative', top: '-13px', background: 'white', paddingRight: '10px' }}
+          >
+            {i}:00
+          </Typography>
+          <TimeblockElement timeblock={mockTimeblock} />
         </Box>
       </Box>,
     );

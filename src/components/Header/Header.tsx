@@ -18,7 +18,7 @@ const Header = () => {
         </Box>
         <Box display="flex" justifyContent="center" alignItems="center" gap="0.5rem">
           <img src="/assets/icons/logo_icon.svg" alt="" height={36} />
-          <Typography variant="h1">let&apos;s meet</Typography>
+          <Typography variant="h1" color="primary">let&apos;s meet</Typography>
         </Box>
         <Box display="flex" justifyContent="center" alignItems="center">
           <Typography variant="h6" component="div">
