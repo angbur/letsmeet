@@ -12,14 +12,14 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   return (
-    <Box display="flex" style={{ gap: '3.125rem' }}>
+    <Box display="flex" alignItems="baseline" style={{ gap: '3.125rem' }}>
       <Navigation />
-      <Box display="flex" flexDirection="column" alignItems="start" sx={{ gap: '1.5rem' }}>
+      <Box display="flex" flexDirection="column" alignItems="start" sx={{ gap: '1.5rem', flex: 1 }}>
         <Button startIcon={<AddIcon />} onClick={() => navigate(routes.newAgenda)}>
           Add new agenda
         </Button>
         <Typography variant="h2">My recent agendas</Typography>
-        <AgendaList numberOfAgendas={5} />
+        <AgendaList numberOfAgendas={5} recentAgendas />
       </Box>
     </Box>
   );
