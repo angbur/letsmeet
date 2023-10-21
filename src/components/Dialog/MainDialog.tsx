@@ -22,7 +22,7 @@ const MainDialog = () => {
 
   const handleClose = () => dispatch(closeDialog());
   return (
-    <StyledDialog open={isOpen} onClose={handleClose}>
+    <StyledDialog open={isOpen} onClose={handleClose} maxWidth="xl">
       {DialogContentComponent ? (
         <DialogContent>
           <DialogContentComponent />
