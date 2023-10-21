@@ -1,6 +1,5 @@
 import React from 'react';
 import { styled } from '@mui/material';
-import useAgendasList from './useAgendasList';
 import { Agenda } from '@store/agendaSlice';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -13,11 +12,16 @@ import Chip from '@mui/material/Chip';
 import IconButton from '@mui/material/IconButton';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import { calculateDaysLeft, getRole, parseDate, parseLastUpdatedDate } from 'src/utils';
+import AgendaOptionsDropdown from '../AgendaOptionsDropdown/AgendaOptionsDropdown';
+import { useDispatch } from 'react-redux';
+import { openDialog } from '@store/dialogSlice';
 
 const TableHeadCell = styled(TableCell)({
   fontWeight: 600,
+  borderBottom: '1px solid #CAC4D0',
+  paddingTop: '1.063rem',
+  paddingBottom: '0.688rem',
 });
 
 const GreyText = styled(Typography)({
@@ -32,7 +36,7 @@ const StyledChip = styled(Chip)({
 });
 
 type AgendaListProps = {
-  numberOfAgendas: number;
+  agendasList: Agenda[];
   recentAgendas?: boolean;
 };
 
@@ -40,8 +44,9 @@ const defaultProps = {
   recentAgendas: false,
 };
 
-const AgendaList = ({ numberOfAgendas = 5, recentAgendas }: AgendaListProps) => {
-  const { agendasList } = useAgendasList({ numberOfAgendas });
+const AgendaList = ({ agendasList, recentAgendas }: AgendaListProps) => {
+  const dispatch = useDispatch();
+  const handleDeleteAgenda = () => dispatch(openDialog('deleteAgenda'));
 
   // delete these later
   const isPublished = true;
@@ -101,15 +106,11 @@ const AgendaList = ({ numberOfAgendas = 5, recentAgendas }: AgendaListProps) => 
                       </IconButton>
                     ) : null}
                     {getRole(userId, agenda.owner_id, agenda.coowners_ids) === 'Owner' && recentAgendas === false ? (
-                      <IconButton aria-label="edit">
+                      <IconButton aria-label="delete" onClick={handleDeleteAgenda}>
                         <DeleteOutlineOutlinedIcon sx={{ color: 'black' }} />
                       </IconButton>
                     ) : null}
-                    {recentAgendas === false ? (
-                      <IconButton aria-label="edit">
-                        <MoreVertOutlinedIcon sx={{ color: 'black' }} />
-                      </IconButton>
-                    ) : null}
+                    {recentAgendas === false ? <AgendaOptionsDropdown /> : null}
                   </span>
                 </TableCell>
               </TableRow>

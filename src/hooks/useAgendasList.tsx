@@ -6,7 +6,7 @@ type AgendasListProps = {
 };
 
 const useAgendasList = ({ numberOfAgendas }: AgendasListProps) => {
-  const { data, error } = useGetAllAgendasQuery();
+  const { data, error, isLoading } = useGetAllAgendasQuery();
   let agendasList: Agenda[] = [];
 
   if (isAgendaList(data))
@@ -18,7 +18,7 @@ const useAgendasList = ({ numberOfAgendas }: AgendasListProps) => {
       })
       .slice(0, numberOfAgendas);
 
-  return { agendasList, error };
+  return { agendasList, error, isLoading };
 };
 
 export default useAgendasList;
