@@ -9,11 +9,16 @@ import AgendaNavigation from './AgendaNavigation/AgendaNavigation';
 import CreateAgendaContent from './CreateAgendaContent/CreateAgendaContent';
 import { useDispatch } from 'react-redux';
 import { openDialog } from '@store/dialogSlice';
+import { openToast } from '@store/toastSlice';
 
 const CreateAgendaPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleDeleteAgenda = () => dispatch(openDialog('deleteAgenda'));
+  const handlePublishAgenda = () =>
+    dispatch(openToast({ text: 'Agenda was successfully published', variant: 'default', action: 'copyLink' }));
+  const handleDraftAgenda = () =>
+    dispatch(openToast({ text: 'Agenda was saved successfully as a draft', variant: 'default' }));
 
   return (
     <div>
@@ -37,8 +42,10 @@ const CreateAgendaPage = () => {
           <Button variant="text" sx={{ padding: '0.75rem' }} onClick={handleDeleteAgenda}>
             Delete
           </Button>
-          <Button variant="outlined">Publish</Button>
-          <Button>Save as draft</Button>
+          <Button variant="outlined" onClick={handlePublishAgenda}>
+            Publish
+          </Button>
+          <Button onClick={handleDraftAgenda}>Save as draft</Button>
         </Box>
       </Box>
       <Box display="flex" sx={{ gap: '2rem' }} alignItems="baseline">
