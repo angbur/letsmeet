@@ -7,18 +7,31 @@ import routes from '@components/App/routing/routes';
 import Typography from '@mui/material/Typography';
 import AgendaNavigation from './AgendaNavigation/AgendaNavigation';
 import CreateAgendaContent from './CreateAgendaContent/CreateAgendaContent';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { openDialog } from '@store/dialogSlice';
 import { openToast } from '@store/toastSlice';
+import { selectEditedAgenda } from '@store/agendaSlice';
+import { useCreateAgendaMutation } from '@services/agenda/agenda';
 
 const CreateAgendaPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const editedAgenda = useSelector(selectEditedAgenda);
+  const [createAgenda, result] = useCreateAgendaMutation();
+
+  const handleDraftAgenda = async () => {
+    try {
+      await createAgenda(editedAgenda).unwrap();
+    } catch {
+      dispatch(openToast({ text: 'Error', variant: 'error' }));
+    }
+    if (result.isSuccess) dispatch(openToast({ text: 'Agenda was saved successfully as a draft', variant: 'default' }));
+    if (result.isError) dispatch(openToast({ text: 'Error', variant: 'error' }));
+  };
+
   const handleDeleteAgenda = () => dispatch(openDialog('deleteAgenda'));
   const handlePublishAgenda = () =>
     dispatch(openToast({ text: 'Agenda was successfully published', variant: 'default', action: 'copyLink' }));
-  const handleDraftAgenda = () =>
-    dispatch(openToast({ text: 'Agenda was saved successfully as a draft', variant: 'default' }));
 
   return (
     <div>
