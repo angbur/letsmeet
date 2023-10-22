@@ -23,7 +23,7 @@ type TimeblockProps = {
 const TimeblockElement = ({ timeblock }: TimeblockProps) => {
   const { palette } = useTheme();
   const startTime = moment.utc(timeblock.start_time).format('HH:mm');
-  const endTime = moment.utc(timeblock.start_time).add(timeblock.duration, 'minutes').local().format('HH:mm');
+  const endTime = moment.utc(timeblock.start_time).add(timeblock.duration, 'minutes').format('HH:mm');
   const [isExpanded, setIsExpanded] = useState(false);
   const timeRange = `${startTime} - ${endTime}`;
 
@@ -41,7 +41,7 @@ const TimeblockElement = ({ timeblock }: TimeblockProps) => {
       sx={{
         background: `${palette.primary.light}`,
         position: 'relative',
-        top: '-1.5rem',
+        top: '-1.9rem',
         borderTop: `2px solid ${palette.primary.main}`,
       }}
     >

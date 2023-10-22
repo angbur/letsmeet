@@ -24,7 +24,7 @@ export type Agenda = {
 };
 
 const defaultAgenda: Agenda = {
-  type: 'conference',
+  type: 'CONFERENCE',
   name: '',
   description: '',
   link: 'htttp://example.link.543965743678345.com',
@@ -33,7 +33,7 @@ const defaultAgenda: Agenda = {
   is_private: false,
   coowners_ids: [],
   last_updated: '',
-  status: 'draft',
+  status: 'DRAFT',
 };
 
 type AgendaState = {
@@ -54,7 +54,6 @@ const agendaSlice = createSlice({
   reducers: {
     updateNewAgenda: (state, action) => {
       state.editedAgenda = { ...state.editedAgenda, ...action.payload };
-      console.log(state.editedAgenda);
     },
   },
   extraReducers: (builder) => {

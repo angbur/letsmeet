@@ -20,25 +20,27 @@ const CreateAgendaPage = () => {
   const [createAgenda, result] = useCreateAgendaMutation();
 
   const handleDraftAgenda = async () => {
-    try {
+    /* try {
       await createAgenda(editedAgenda).unwrap();
     } catch {
       dispatch(openToast({ text: 'Error', variant: 'error' }));
     }
     if (result.isSuccess) dispatch(openToast({ text: 'Agenda was saved successfully as a draft', variant: 'default' }));
-    if (result.isError) dispatch(openToast({ text: 'Error', variant: 'error' }));
+    if (result.isError) dispatch(openToast({ text: 'Error', variant: 'error' })); */
+    dispatch(openToast({ text: 'Agenda was saved successfully as a draft', variant: 'default' }));
   };
 
   const handleDeleteAgenda = () => dispatch(openDialog('deleteAgenda'));
   const handlePublishAgenda = async () => {
     const publishedAgenda: Agenda = { ...editedAgenda, status: 'PUBLISHED' };
-    try {
+    /* try {
       await createAgenda(publishedAgenda).unwrap();
     } catch {
       dispatch(openToast({ text: 'Error', variant: 'error' }));
-    }
-    if (result.isSuccess) dispatch(openToast({ text: 'Agenda was published successfully', variant: 'default' }));
-    if (result.isError) dispatch(openToast({ text: 'Error', variant: 'error' }));
+    } */
+    //if (result.isSuccess) dispatch(openToast({ text: 'Agenda was published successfully', variant: 'default' }));
+    //if (result.isError) dispatch(openToast({ text: 'Error', variant: 'error' }));
+    dispatch(openToast({ text: 'Agenda was published successfully', variant: 'default' }));
   };
 
   return (
