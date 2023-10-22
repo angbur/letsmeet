@@ -2,9 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import { timeblockApi } from '@services/timeblock/timeblock';
 import { RootState } from './store';
 
-const blocksTypes = ['break', 'talk', 'workshop', 'presentation', 'networking', 'other'];
+export const blocksTypes = ['break', 'talk', 'workshop', 'presentation', 'networking', 'other'];
 
-type BlockType = (typeof blocksTypes)[number];
+export type BlockType = (typeof blocksTypes)[number];
 
 export type Timeblock = {
   id: string;
