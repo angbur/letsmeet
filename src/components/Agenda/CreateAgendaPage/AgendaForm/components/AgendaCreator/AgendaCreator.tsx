@@ -9,32 +9,19 @@ import { openDialog } from '@store/dialogSlice';
 import { useTheme } from '@mui/material/styles';
 import styled from '@mui/material/styles/styled';
 import TextField from '@mui/material/TextField';
-import type { Theme } from '@mui/material/styles';
-import TimeblockElement from './components/TimeblockElement/TimeblockElement';
-import { Typography } from '@mui/material';
-
-const mockTimeblock = {
-  id: '423568790-8765435678-7865-timeblock-6',
-  title: 'Ship IT Hackathon - Welcome Breakfast',
-  description: 'Welcome breakfast and T-shirts distribution',
-  location: 'Location 1',
-  agenda_id: '423568790-8765435678-7865',
-  start_time: '2023-10-23T08:30:00.000Z',
-  duration: 60,
-  type: 'other',
-  presenter_id: '45678',
-};
+import moment from 'moment';
+import HourGrid from './components/HourGrid/HourGrid';
 
 const displayedHours: string[] = ['Work hours (8:00 - 17:00)', 'All day (0:00 - 24:00)'];
-type DisplayedHours = (typeof displayedHours)[number];
+export type DisplayedHours = (typeof displayedHours)[number];
 
 const AgendaCreator = () => {
   const dispatch = useDispatch();
   const { palette } = useTheme();
-  const days: string[] = ['16.03.2023', '17.03.2023'];
-  const timeBlocks = [{ i: '1', x: 0, y: 0, w: 1, h: 1 }];
+  const days: string[] = ['20.10.2023', '22.10.2023'];
   const [tab, setTab] = useState(days[0]);
   const [hoursRange, setHoursRange] = useState(displayedHours[0]);
+  const currentDate = moment(tab, 'DD.MM.YYYY');
 
   const handleChangeTab = (event: React.SyntheticEvent, newValue: string) => setTab(newValue);
 
@@ -82,8 +69,8 @@ const AgendaCreator = () => {
         </Button>
       </Box>
       <Box display="flex" flexDirection="row">
-        <Box display="flex" flexDirection="column" width="100%" gap="0.5rem">
-          {generateHourGrid({ palette: palette, hourRange: hoursRange })}
+        <Box display="flex" flexDirection="column" width="100%">
+          <HourGrid hourRange={hoursRange} date={currentDate} />
         </Box>
       </Box>
     </Box>
@@ -98,34 +85,3 @@ const StyledTabs = styled(Tabs)({
     justifyContent: 'space-around',
   },
 });
-
-type GenerateHorGridProps = {
-  palette: Theme['palette'];
-  hourRange: DisplayedHours;
-};
-
-const generateHourGrid = ({ palette, hourRange }: GenerateHorGridProps) => {
-  const hours = [];
-  const startHour = hourRange === 'Work hours (8:00 - 17:00)' ? 8 : 0;
-  const endHour = hourRange === 'Work hours (8:00 - 17:00)' ? 17 : 24;
-
-  for (let i = startHour; i < endHour; i++) {
-    hours.push(
-      <Box key={i} display="flex" alignItems="center" gap="4px" width="100%" flexDirection="column">
-        <Box width="100%" sx={{ borderTop: '1px solid #ccc', minHeight: '100px', color: `${palette.dark.main}` }}>
-          <Typography
-            variant="caption"
-            color="dark"
-            fontWeight={600}
-            fontSize={'0.8rem'}
-            sx={{ position: 'relative', top: '-13px', background: 'white', paddingRight: '10px' }}
-          >
-            {i}:00
-          </Typography>
-          <TimeblockElement timeblock={mockTimeblock} />
-        </Box>
-      </Box>,
-    );
-  }
-  return hours;
-};
