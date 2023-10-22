@@ -31,7 +31,9 @@ const generateHours = (startHour: number, endHour: number, date: Moment) => {
       const isBusy = mockTimeblockArray.some(
         (timeblock) =>
           dateWithTimeUTC.isSameOrAfter(moment(timeblock.start_time).utc().utcOffset(+2, true)) &&
-          dateWithTimeUTC.isBefore(moment.utc(timeblock.start_time).clone().add(timeblock.duration, 'minutes')),
+          dateWithTimeUTC.isBefore(
+            moment.utc(timeblock.start_time).utc().utcOffset(+2, true).clone().add(timeblock.duration, 'minutes'),
+          ),
       );
 
       hours.push(<HourBlock key={key} timeString={timeString} isBusy={isBusy} dateWithTime={dateWithTimeUTC} />);
