@@ -6,6 +6,9 @@ import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
+
+import routes from '@components/App/routing/routes';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   width: '22.5rem',
@@ -24,6 +27,8 @@ type ThemeCardProps = {
 };
 
 const ThemeCard = ({ themeName, themeImage, applied, handleAppliedTheme }: ThemeCardProps) => {
+  const navigate = useNavigate();
+
   return (
     <StyledCard>
       <CardHeader sx={{ padding: '1rem' }}>
@@ -33,7 +38,9 @@ const ThemeCard = ({ themeName, themeImage, applied, handleAppliedTheme }: Theme
       </CardHeader>
       <CardMedia sx={{ height: '125px' }} image={`/assets/images/themes/${themeImage}`} title={themeName}></CardMedia>
       <CardActions sx={{ padding: '1rem', justifyContent: 'flex-end' }}>
-        <Button variant="outlined">Preview</Button>
+        <Button onClick={() => navigate(`${routes.previewAgenda}/?theme=${themeName}`)} variant="outlined">
+          Preview
+        </Button>
         <Button disabled={applied} onClick={() => handleAppliedTheme(themeName)}>
           {applied ? 'Applied' : 'Use'}
         </Button>
