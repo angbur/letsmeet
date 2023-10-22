@@ -7,13 +7,39 @@ import routes from '@components/App/routing/routes';
 import Typography from '@mui/material/Typography';
 import AgendaNavigation from './AgendaNavigation/AgendaNavigation';
 import CreateAgendaContent from './CreateAgendaContent/CreateAgendaContent';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { openDialog } from '@store/dialogSlice';
+import { openToast } from '@store/toastSlice';
+import { Agenda, selectEditedAgenda } from '@store/agendaSlice';
+import { useCreateAgendaMutation } from '@services/agenda/agenda';
 
 const CreateAgendaPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const editedAgenda = useSelector(selectEditedAgenda);
+  const [createAgenda, result] = useCreateAgendaMutation();
+
+  const handleDraftAgenda = async () => {
+    try {
+      await createAgenda(editedAgenda).unwrap();
+    } catch {
+      dispatch(openToast({ text: 'Error', variant: 'error' }));
+    }
+    if (result.isSuccess) dispatch(openToast({ text: 'Agenda was saved successfully as a draft', variant: 'default' }));
+    if (result.isError) dispatch(openToast({ text: 'Error', variant: 'error' }));
+  };
+
   const handleDeleteAgenda = () => dispatch(openDialog('deleteAgenda'));
+  const handlePublishAgenda = async () => {
+    const publishedAgenda: Agenda = { ...editedAgenda, status: 'PUBLISHED' };
+    try {
+      await createAgenda(publishedAgenda).unwrap();
+    } catch {
+      dispatch(openToast({ text: 'Error', variant: 'error' }));
+    }
+    if (result.isSuccess) dispatch(openToast({ text: 'Agenda was published successfully', variant: 'default' }));
+    if (result.isError) dispatch(openToast({ text: 'Error', variant: 'error' }));
+  };
 
   return (
     <div>
@@ -37,8 +63,10 @@ const CreateAgendaPage = () => {
           <Button variant="text" sx={{ padding: '0.75rem' }} onClick={handleDeleteAgenda}>
             Delete
           </Button>
-          <Button variant="outlined">Publish</Button>
-          <Button>Save as draft</Button>
+          <Button variant="outlined" onClick={handlePublishAgenda}>
+            Publish
+          </Button>
+          <Button onClick={handleDraftAgenda}>Save as draft</Button>
         </Box>
       </Box>
       <Box display="flex" sx={{ gap: '2rem' }} alignItems="baseline">

@@ -10,6 +10,7 @@ import AllAgendasPage from '@components/Agenda/AllAgendasPage/AllAgendasPage';
 import MyAgendasPage from '@components/Agenda/MyAgendasPage/MyAgendasPage';
 import PreviewAgendaPage from '@components/Agenda/PreviewAgendaPage/PreviewAgendaPage';
 import MainDialog from '@components/Dialog/MainDialog';
+import Toast from '@components/Toast/Toast';
 
 const App = () => {
   const location = useLocation();
@@ -45,6 +46,7 @@ const App = () => {
   return (
     <Fragment>
       <MainDialog />
+      <Toast />
       <Header />
       <Box sx={{ backgroundImage: setBackgroundImage(theme), padding: '3.188rem 1.5rem 1.5rem' }}>
         <Routes>

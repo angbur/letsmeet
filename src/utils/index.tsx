@@ -1,5 +1,4 @@
 export const parseDate = (date: string): string => {
-  console.log(date);
   const splitDate = date.split(' ')[0];
   return splitDate.split('-').reverse().join('.');
 };

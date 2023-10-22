@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { User } from 'src/store/userSlice';
+import { User, UserRole } from 'src/store/userSlice';
+
+const baseUrl = 'https://letsmeet-35f25f0de361.herokuapp.com';
 
 export type LoginResponseData = {
   data: User;
@@ -8,12 +10,13 @@ export type LoginResponseData = {
 export type RequestData = {
   email: string;
   password: string;
+  role?: UserRole;
 };
 
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api.npoint.io/b174c60429102a813523',
+    baseUrl: baseUrl,
     prepareHeaders: (headers) => {
       headers.set('Access-Control-Allow-Origin', '*');
       return headers;
@@ -21,13 +24,20 @@ export const userApi = createApi({
   }),
   endpoints: (builder) => ({
     login: builder.mutation<LoginResponseData, RequestData>({
-      query: (credentials) => ({
-        url: 'login',
+      query: (body) => ({
+        url: '/login',
         method: 'POST',
-        body: credentials,
+        body,
+      }),
+    }),
+    createUser: builder.mutation<LoginResponseData, RequestData>({
+      query: (body) => ({
+        url: '/create_user',
+        method: 'POST',
+        body,
       }),
     }),
   }),
 });
 
-export const { useLoginMutation } = userApi;
+export const { useLoginMutation, useCreateUserMutation } = userApi;

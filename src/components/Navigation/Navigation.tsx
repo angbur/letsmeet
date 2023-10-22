@@ -37,7 +37,6 @@ const Navigation = () => {
         width: '270px',
       }}
     >
-      {console.log(pathname)}
       <Typography variant="h6" sx={{ padding: '1.125rem 1rem' }}>
         Navigation
       </Typography>

@@ -14,6 +14,7 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import styled from '@mui/material/styles/styled';
+import type { Theme } from '@mui/material/styles';
 
 type TimeblockProps = {
   timeblock: Timeblock;
@@ -21,8 +22,8 @@ type TimeblockProps = {
 
 const TimeblockElement = ({ timeblock }: TimeblockProps) => {
   const { palette } = useTheme();
-  const startTime = moment(timeblock.start_time).format('HH:mm');
-  const endTime = moment(timeblock.start_time).add(timeblock.duration, 'minutes').format('HH:mm');
+  const startTime = moment.utc(timeblock.start_time).format('HH:mm');
+  const endTime = moment.utc(timeblock.start_time).add(timeblock.duration, 'minutes').local().format('HH:mm');
   const [isExpanded, setIsExpanded] = useState(false);
   const timeRange = `${startTime} - ${endTime}`;
 
@@ -35,27 +36,28 @@ const TimeblockElement = ({ timeblock }: TimeblockProps) => {
       display="flex"
       justifyContent="flex-start"
       alignItems="start"
-      width="90%"
       ml={8}
-      p={2}
-      sx={{ background: `${palette.primary.light}`, position: 'relative', top: '-1.5rem' }}
+      p={0}
+      sx={{
+        background: `${palette.primary.light}`,
+        position: 'relative',
+        top: '-1.5rem',
+        borderTop: `2px solid ${palette.primary.main}`,
+      }}
     >
       <Box
         display="flex"
         flexDirection="column"
-        justifyContent="center"
+        justifyContent="flex-start"
         alignItems="start"
         width="20%"
+        pl={1}
+        pt={isExpanded ? 0 : 0.5}
+        height={'100%'}
         mt={isExpanded ? '0.7rem' : 0}
         sx={{ transition: 'all 0.1s ease-out' }}
       >
-        <Typography
-          variant="caption"
-          color="primary"
-          fontWeight={600}
-          fontSize={'0.8rem'}
-          sx={{ marginBottom: '0.5rem' }}
-        >
+        <Typography variant="caption" color="primary" fontWeight={600} fontSize={'0.8rem'}>
           {timeRange}
         </Typography>
         <Typography variant="caption" color="dark">
@@ -103,7 +105,18 @@ const TimeblockElement = ({ timeblock }: TimeblockProps) => {
               </Box>
             </Box>
           </StyledAccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails
+            sx={{
+              borderRadius: '8px',
+              position: 'relative',
+              zIndex: '200',
+              background: `${palette.primary.light}`,
+              width: '70%',
+              boxShadow: ' 0 8px 8px -6px rgba(0, 0, 0, 0.1)',
+              border: `2px solid ${palette.primary.main}`,
+            }}
+          >
+            <UpwardTriangle palette={palette} />
             <Typography variant="caption" color="dark">
               <strong>Presenter</strong>: {timeblock.presenter_id}
             </Typography>
@@ -146,3 +159,14 @@ const StyledAccordionSummary = styled(AccordionSummary)({
     margin: 0,
   },
 });
+
+const UpwardTriangle = styled('div')<Pick<Theme, 'palette'>>(({ palette }) => ({
+  position: 'absolute',
+  top: '-10px',
+  left: 'calc(10% - 10px)',
+  width: 0,
+  height: 0,
+  borderLeft: '10px solid transparent',
+  borderRight: '10px solid transparent',
+  borderBottom: `10px solid ${palette.primary.main}`,
+}));

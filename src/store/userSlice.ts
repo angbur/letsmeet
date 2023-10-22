@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { userApi } from 'src/services/user/user';
 
-type UserRole = 'admin' | 'user';
+export type UserRole = 'admin' | 'user';
 
 export type User = {
   loggedIn: boolean;
