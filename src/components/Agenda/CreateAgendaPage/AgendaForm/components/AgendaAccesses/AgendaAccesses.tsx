@@ -10,15 +10,9 @@ import { openDialog } from '@store/dialogSlice';
 import { useDispatch } from 'react-redux';
 import UserChip from '../UserChip/UserChip';
 
-const ownersArray = [{ firstName: 'Jane', lastName: 'Doe', email: 'jane.doe@example.com', id: '1' }];
-const coorgsArray = [
-  { firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', id: '2' },
-  { firstName: 'Mary', lastName: 'Doe', email: 'mary.doe@example.com', id: '3' },
-];
-const viewersArray = [
-  { firstName: 'Tom', lastName: 'Doe', email: 'tom.doe@example.com', id: '4' },
-  { firstName: 'Kate', lastName: 'Doe', email: 'kate.doe@example.com', id: '5' },
-];
+const ownersArray = [{ firstName: 'Ania', lastName: 'Kowalska', email: 'anna.kowalska@example.com', id: '1' }];
+const coorgsArray = [{ firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', id: '2' }];
+const viewersArray = [];
 
 const AgendaAccesses = () => {
   const dispatch = useDispatch();

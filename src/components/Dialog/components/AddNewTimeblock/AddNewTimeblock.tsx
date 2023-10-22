@@ -169,7 +169,7 @@ const AddNewTimeblock = () => {
               {...register('additionalInfo')}
             />
           </Box>
-          <Box>map</Box>
+          <Box></Box>
         </Box>
         <DialogActions>
           <Button variant="text" onClick={handleClose}>

@@ -7,18 +7,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import PreviewTimeblock from './components/PreviewTimeblock/PreviewTimeblock';
-
-const mockTimeblock = {
-  id: '423568790-8765435678-7865-timeblock-6',
-  title: 'Ship IT Hackathon - Welcome Breakfast',
-  description: 'Welcome breakfast and T-shirts distribution',
-  location: 'Location 1',
-  agenda_id: '423568790-8765435678-7865',
-  start_time: '2023-10-23T08:30:00.000Z',
-  duration: 60,
-  type: 'other',
-  presenter_id: '45678',
-};
+import { firstDay, secondDay } from './mockTimeblocks';
 
 type PreviewAgendaProps = {
   themeColor?: string;
@@ -27,7 +16,7 @@ type PreviewAgendaProps = {
 const PreviewAgendaPage = ({ themeColor }: PreviewAgendaProps) => {
   const { palette } = useTheme();
   const primaryColor = themeColor ? themeColor : palette.primary.main;
-  const days: string[] = ['16.03.2023', '17.03.2023'];
+  const days: string[] = ['20.10.2023', '23.10.2023'];
 
   const [tab, setTab] = useState(days[0]);
 
@@ -53,7 +42,7 @@ const PreviewAgendaPage = ({ themeColor }: PreviewAgendaProps) => {
       }}
     >
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-        <Typography variant="h2">Nazwa eventu z backa</Typography>
+        <Typography variant="h2">Ship IT Hackathon</Typography>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '1rem' }}>
           <Typography>If you have any question</Typography>
           <Button sx={{ color: primaryColor, borderColor: primaryColor }} variant="outlined">
@@ -75,7 +64,7 @@ const PreviewAgendaPage = ({ themeColor }: PreviewAgendaProps) => {
           Last updated:
         </Typography>
         <Box>
-          <Typography>data z backa</Typography>
+          <Typography>19.10.2023</Typography>
         </Box>
       </Box>
       <Box sx={{ marginBottom: '2.75rem' }}>
@@ -110,7 +99,13 @@ const PreviewAgendaPage = ({ themeColor }: PreviewAgendaProps) => {
           ))}
         </StyledTabs>
       </Box>
-      <PreviewTimeblock timeblock={mockTimeblock} themeColor={primaryColor} />
+      {tab === '20.10.2023'
+        ? firstDay.map((timeblock) => (
+            <PreviewTimeblock key={timeblock.id} timeblock={timeblock} themeColor={primaryColor} />
+          ))
+        : secondDay.map((timeblock) => (
+            <PreviewTimeblock key={timeblock.id} timeblock={timeblock} themeColor={primaryColor} />
+          ))}
       <Box></Box>
     </Box>
   );
