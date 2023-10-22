@@ -50,7 +50,7 @@ const AgendaList = ({ agendasList, recentAgendas }: AgendaListProps) => {
 
   // delete these later
   const isPublished = true;
-  const userId = '34567';
+  const userId = '1';
 
   return (
     <div className="AgendaList" style={{ width: '100%' }}>
@@ -81,7 +81,7 @@ const AgendaList = ({ agendasList, recentAgendas }: AgendaListProps) => {
                   <GreyText>Last updated: {parseLastUpdatedDate(agenda.last_updated)}</GreyText>
                 </TableCell>
                 <TableCell>
-                  {isPublished ? (
+                  {agenda.status === 'PUBLISHED' ? (
                     <span style={{ display: 'flex', gap: '0.5rem' }}>
                       <StyledChip color="success" label="Published" size="small" />
                       <StyledChip

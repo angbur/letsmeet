@@ -1,16 +1,21 @@
+const addZeroToDate = (day: number): string | number => {
+  return day < 10 ? `0${day}` : day;
+};
+
 export const parseDate = (date: string): string => {
-  const splitDate = date.split(' ')[0];
-  return splitDate.split('-').reverse().join('.');
+  const newDate = new Date(date);
+  return `${addZeroToDate(newDate.getDate())}.${newDate.getMonth() + 1}.${newDate.getFullYear()}`;
 };
 
 export const parseLastUpdatedDate = (date: string): string => {
-  const splitDates = date.split(' ');
-  const reversedDate = splitDates[0].split('-').reverse().join('.');
-  return `${reversedDate} ${splitDates[1]}`;
+  const newDate = new Date(date);
+  return `${addZeroToDate(newDate.getDate())}.${
+    newDate.getMonth() + 1
+  }.${newDate.getFullYear()} ${newDate.getHours()}:${newDate.getMinutes()}`;
 };
 
 export const calculateDaysLeft = (date: string): string => {
-  const startDate = new Date(date.split(' ')[0]);
+  const startDate = new Date(date);
   const diffTime = Math.abs(startDate.getTime() - new Date().getTime());
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   return `${diffDays} day${diffDays !== 1 ? 's' : ''} left`;
