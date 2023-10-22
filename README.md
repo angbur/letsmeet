@@ -22,7 +22,7 @@ Let's Meet is a powerful React + Typescript + Vite app designed to revolutionize
 
 ## Backend
 
-The backend for Let's Meet is located [here](link-to-backend-repo). It's built with Python and Flask, and the data is stored in a PostgreSQL database.
+The backend for Let's Meet is located [here](https://github.com/jakub-beep/letsmeet-back). It's built with Python and Flask, and the data is stored in a PostgreSQL database.
 
 We've crafted a user-friendly tool that aims to make event planning a breeze.
 
@@ -59,6 +59,13 @@ Let's meet empowers organizers to plan and execute meetings and events seamlessl
 Ready to take your event planning to the next level? Let's meet is here to make your life easier and your events unforgettable. Try it now and experience the future of event organization! 🎉
 
 **Disclaimer:** *Let's meet was created during Ship IT Hackathon 2023, fueled by passion and caffeine. Use responsibly, and may your events be ever successful!*
+
+## Collaborators: 
+- Aleksandra Maziarz
+- Agnieszka Bury
+- Roksana Rachel
+- Jakub Wytykowski
+- Sebastian Morta
 
 Happy Planning! 🚀✨
    
