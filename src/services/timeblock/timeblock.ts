@@ -1,10 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Timeblock } from '@store/timeblockSlice';
 
+const baseUrl = 'https://letsmeet-35f25f0de361.herokuapp.com';
+
 export const timeblockApi = createApi({
   reducerPath: 'timeblockApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api.npoint.io/4deca2f9dfc1fa09408f',
+    baseUrl: baseUrl,
     prepareHeaders: (headers) => {
       headers.set('Access-Control-Allow-Origin', '*');
       return headers;
@@ -13,33 +15,43 @@ export const timeblockApi = createApi({
   endpoints: (builder) => ({
     getAllTimeblocks: builder.query({
       query: () => ({
-        url: '',
+        url: '/get_timeblocks',
         method: 'GET',
       }),
     }),
-
     getAllTimeblocksByAgendaId: builder.mutation({
       query: (agendaId: string) => ({
-        url: `agenda/${agendaId}/timeblock`,
+        url: `get_agenda_timeblocks/${agendaId}`,
         method: 'GET',
       }),
     }),
     createTimeblock: builder.mutation({
       query: (timeblock: Timeblock) => ({
-        url: 'timeblock',
+        url: 'create_timeblock',
         method: 'POST',
         body: timeblock,
       }),
     }),
     updateTimeblock: builder.mutation({
       query: (timeblock: Timeblock) => ({
-        url: 'timeblock',
+        url: 'update_timeblock',
         method: 'PUT',
         body: timeblock,
+      }),
+    }),
+    deleteTimeblockById: builder.mutation({
+      query: (timeblockId: string) => ({
+        url: `delete_timeblock/${timeblockId}`,
+        method: 'DELETE',
       }),
     }),
   }),
 });
 
-export const { useGetAllTimeblocksByAgendaIdMutation, useCreateTimeblockMutation, useUpdateTimeblockMutation } =
-  timeblockApi;
+export const {
+  useGetAllTimeblocksByAgendaIdMutation,
+  useCreateTimeblockMutation,
+  useUpdateTimeblockMutation,
+  useDeleteTimeblockByIdMutation,
+  useGetAllTimeblocksQuery,
+} = timeblockApi;

@@ -74,9 +74,9 @@ const AgendaList = ({ agendasList, recentAgendas }: AgendaListProps) => {
                 </TableCell>
                 <TableCell>
                   <Typography>
-                    {agenda.endDate !== agenda.startDate
-                      ? `${parseDate(agenda.startDate)} - ${parseDate(agenda.endDate)}`
-                      : parseDate(agenda.startDate)}
+                    {agenda.end_date !== agenda.start_date
+                      ? `${parseDate(agenda.start_date)} - ${parseDate(agenda.end_date)}`
+                      : parseDate(agenda.start_date)}
                   </Typography>
                   <GreyText>Last updated: {parseLastUpdatedDate(agenda.last_updated)}</GreyText>
                 </TableCell>
@@ -85,7 +85,7 @@ const AgendaList = ({ agendasList, recentAgendas }: AgendaListProps) => {
                     <span style={{ display: 'flex', gap: '0.5rem' }}>
                       <StyledChip color="success" label="Published" size="small" />
                       <StyledChip
-                        label={calculateDaysLeft(agenda.startDate)}
+                        label={calculateDaysLeft(agenda.start_date)}
                         size="small"
                         variant="outlined"
                         sx={{ color: 'black', borderColor: 'black' }}

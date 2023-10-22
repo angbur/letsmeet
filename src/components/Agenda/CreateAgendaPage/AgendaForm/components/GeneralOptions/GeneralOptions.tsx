@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import styled from '@mui/material/styles/styled';
 import { useTheme } from '@mui/material/styles';
@@ -12,17 +12,20 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import Switch, { SwitchProps } from '@mui/material/Switch';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { visits } from '@store/agendaSlice';
+import { selectEditedAgenda, updateNewAgenda, visits } from '@store/agendaSlice';
 import type { Moment } from 'moment';
 import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
 
 const GeneralOptions = () => {
+  const dispatch = useDispatch();
   const { palette } = useTheme();
   const visitsTypes = visits.map((visit) => visit.charAt(0).toUpperCase() + visit.slice(1));
   const [startDate, setStartDate] = useState<Moment | null>(moment(new Date()));
   const [endDate, setEndDate] = useState<Moment | null>(moment(new Date()));
   const [german, setGerman] = useState<boolean>(true);
   const [polish, setPolish] = useState<boolean>(true);
+  const newAgenda = useSelector(selectEditedAgenda);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value === 'german') {
@@ -32,6 +35,18 @@ const GeneralOptions = () => {
       setPolish((prev) => !prev);
     }
   };
+
+  const handleUpdateNewAgenda = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    dispatch(updateNewAgenda({ [event.target.name]: event.target.value }));
+  };
+
+  useEffect(() => {
+    dispatch(updateNewAgenda({ start_date: startDate?.format('YYYY-MM-DD') }));
+  }, [startDate, dispatch]);
+
+  useEffect(() => {
+    dispatch(updateNewAgenda({ end_date: endDate?.format('YYYY-MM-DD') }));
+  }, [endDate, dispatch]);
 
   return (
     <Box
@@ -47,11 +62,13 @@ const GeneralOptions = () => {
       </StyledFormSectionTitle>
       <Box display={'flex'} flexDirection={'column'} mb={8} width={'100%'} gap={'2rem'}>
         <TextField
-          id="visit-type-field"
+          id="type"
+          name="type"
           select
           label="Type of visit"
           required
-          defaultValue={visitsTypes[0]}
+          onChange={(event) => handleUpdateNewAgenda(event)}
+          value={newAgenda.type}
           sx={{ width: '80%' }}
           SelectProps={{
             native: true,
@@ -65,27 +82,35 @@ const GeneralOptions = () => {
         </TextField>
         <TextField
           error={false}
-          id="event-name-field"
+          id="name"
+          name="name"
           label="Name of the event"
           helperText="Max. 80 characters"
           placeholder="Insert event name here"
+          value={newAgenda.name}
+          onChange={(event) => handleUpdateNewAgenda(event)}
           required
           sx={{ width: '80%' }}
         />
         <TextField
-          id="description-field"
+          id="description"
+          name="description"
           label="Description"
           required
           multiline
           rows={4}
+          value={newAgenda.description}
+          onChange={(event) => handleUpdateNewAgenda(event)}
           placeholder="Insert description here"
           helperText={'Max. 140 characters'}
           sx={{ width: '80%' }}
         />
         <TextField
           error={false}
-          id="link-field"
-          defaultValue={'htttp://example.link.543965743678345.com'}
+          id="link"
+          name="link"
+          value={newAgenda.link}
+          onChange={(event) => handleUpdateNewAgenda(event)}
           label="Link"
           required
           disabled
