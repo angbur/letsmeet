@@ -93,14 +93,6 @@ const PreviewTimeblock = ({ timeblock, themeColor }: TimeblockProps) => {
                   {timeblock.type}
                 </Typography>
               </Box>
-              <Box display="flex" gap="0.5rem" mr={1}>
-                <IconButton aria-label="delete" size="small" onClick={handleHeaderClick}>
-                  <DeleteIcon fontSize="small" sx={{ color: primaryColor }} />
-                </IconButton>
-                <IconButton aria-label="edit" size="small">
-                  <EditIcon fontSize="small" sx={{ color: primaryColor }} onClick={handleHeaderClick} />
-                </IconButton>
-              </Box>
             </Box>
           </StyledAccordionSummary>
           <AccordionDetails>
