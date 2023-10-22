@@ -18,11 +18,11 @@ const App = () => {
   const setBackgroundImage = (theme) => {
     switch (theme) {
       case 'professional':
-        return `url('/public/assets/images/themes/professional.jpg')`;
+        return `url('/assets/images/themes/professional.jpg')`;
       case 'party':
-        return `url('/public/assets/images/themes/party.jpg')`;
+        return `url('/assets/images/themes/party.jpg')`;
       case 'sky':
-        return `url('/public/assets/images/themes/sky.jpg')`;
+        return `url('/assets/images/themes/sky.jpg')`;
       default:
         return '';
     }
