@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Typography, useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import { Moment } from 'moment';
@@ -17,7 +17,7 @@ type HourBlockProps = {
 const HourBlock = ({ timeString, isBusy, dateWithTime }: HourBlockProps) => {
   const dispatch = useDispatch();
   const { palette } = useTheme();
-  const [showAddButton, setShowAddButton] = React.useState(false);
+  const [showAddButton, setShowAddButton] = useState(false);
 
   const handleAddNewTimeblock = () => dispatch(openDialog('createTimeblock'));
 

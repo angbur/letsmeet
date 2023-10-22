@@ -132,9 +132,9 @@ type TimeblockDraggableListProps = {
 };
 
 const TimeblockDraggableList = ({ time }: TimeblockDraggableListProps) => {
-  const formattedTime = time.format('YYYY-MM-DDTHH:mm:ss.SSSSZ');
+  const formattedTime = time.utc().format('YYYY-MM-DDTHH:mm:ss.SSSSZ');
   const filteredTimeblocks = mockTimeblockArray.filter((timeblock) => {
-    const timeblockStartTime = moment(timeblock.start_time);
+    const timeblockStartTime = moment.utc(timeblock.start_time).utcOffset(+2, true);
     return timeblockStartTime.isSame(formattedTime);
   });
 

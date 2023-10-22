@@ -26,18 +26,17 @@ const generateHours = (startHour: number, endHour: number, date: Moment) => {
     for (let minute = 0; minute < 60; minute += 5) {
       const timeString = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
       const key = `${hour}-${minute}`;
-      const dateWithTime = date.clone().set({ hour, minute, second: 0 });
+      const dateWithTimeUTC = date.clone().set({ hour, minute, second: 0 }).utc();
 
       const isBusy = mockTimeblockArray.some(
         (timeblock) =>
-          dateWithTime.isSameOrAfter(timeblock.start_time) &&
-          dateWithTime.isBefore(moment(timeblock.start_time).clone().add(timeblock.duration, 'minutes')),
+          dateWithTimeUTC.isSameOrAfter(moment(timeblock.start_time).utc().utcOffset(+2, true)) &&
+          dateWithTimeUTC.isBefore(moment.utc(timeblock.start_time).clone().add(timeblock.duration, 'minutes')),
       );
 
-      hours.push(<HourBlock key={key} timeString={timeString} isBusy={isBusy} dateWithTime={dateWithTime} />);
+      hours.push(<HourBlock key={key} timeString={timeString} isBusy={isBusy} dateWithTime={dateWithTimeUTC} />);
     }
   }
-
   return hours;
 };
 
