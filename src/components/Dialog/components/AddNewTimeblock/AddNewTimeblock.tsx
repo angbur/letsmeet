@@ -87,7 +87,7 @@ const AddNewTimeblock = () => {
                 type="number"
                 sx={{ width: '23%' }}
                 placeholder="ex. 15"
-                helperText={'Only numerical values, in minutes'}
+                helperText={'In minutes'}
                 label="Duration*"
               />
             )}
