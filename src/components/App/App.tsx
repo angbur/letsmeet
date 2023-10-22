@@ -15,6 +15,7 @@ const App = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const theme = queryParams.get('theme');
+
   const setBackgroundImage = (theme) => {
     switch (theme) {
       case 'professional':
@@ -27,6 +28,20 @@ const App = () => {
         return '';
     }
   };
+
+  const setThemeColor = (theme) => {
+    switch (theme) {
+      case 'professional':
+        return '#0B1AA1';
+      case 'party':
+        return '#6750A4';
+      case 'sky':
+        return '#365E9F';
+      default:
+        return '';
+    }
+  };
+
   return (
     <Fragment>
       <MainDialog />
@@ -37,7 +52,7 @@ const App = () => {
           <Route path={routes.newAgenda} element={<CreateAgendaPage />}></Route>
           <Route path={routes.myAgendas} element={<MyAgendasPage />}></Route>
           <Route path={routes.allAgendas} element={<AllAgendasPage />}></Route>
-          <Route path={routes.previewAgenda} element={<PreviewAgendaPage />}></Route>
+          <Route path={routes.previewAgenda} element={<PreviewAgendaPage themeColor={setThemeColor(theme)} />}></Route>
         </Routes>
       </Box>
     </Fragment>
