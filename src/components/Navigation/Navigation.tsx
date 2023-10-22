@@ -50,17 +50,21 @@ const Navigation = () => {
           },
         }}
       >
-        {Object.keys(routes).map((route) => (
-          <ListItemButton
-            selected={routes[route] === pathname}
-            onClick={() => navigate(routes[route])}
-            key={route}
-            disableRipple
-          >
-            <Circle />
-            <Typography variant="h6">{navigationLabels[route]}</Typography>
-          </ListItemButton>
-        ))}
+        {Object.keys(routes).map((route) => {
+          if (route !== 'previewAgenda') {
+            return (
+              <ListItemButton
+                selected={routes[route] === pathname}
+                onClick={() => navigate(routes[route])}
+                key={route}
+                disableRipple
+              >
+                <Circle />
+                <Typography variant="h6">{navigationLabels[route]}</Typography>
+              </ListItemButton>
+            );
+          }
+        })}
       </List>
       <Divider sx={{ marginTop: '0.5rem' }} />
       <Typography variant="h6" sx={{ padding: '1.125rem 1rem' }}>
