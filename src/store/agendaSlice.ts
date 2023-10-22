@@ -2,11 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import { agendaApi } from 'src/services/agenda/agenda';
 import { RootState } from './store';
 
-export const visits = ['conference', 'meeting', 'event', 'hackathon', 'workshops', 'other'] as const;
+export const visits = ['CONFERENCE', 'MEETING', 'EVENT', 'HACKATHON', 'WORKSHOP', 'OTHER'] as const;
 
 type VisitType = (typeof visits)[number];
 
-type AgendaStatus = 'draft' | 'published';
+type AgendaStatus = 'DRAFT' | 'PUBLISHED';
 
 export type Agenda = {
   id?: string;

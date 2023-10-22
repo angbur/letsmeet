@@ -10,7 +10,7 @@ import CreateAgendaContent from './CreateAgendaContent/CreateAgendaContent';
 import { useDispatch, useSelector } from 'react-redux';
 import { openDialog } from '@store/dialogSlice';
 import { openToast } from '@store/toastSlice';
-import { selectEditedAgenda } from '@store/agendaSlice';
+import { Agenda, selectEditedAgenda } from '@store/agendaSlice';
 import { useCreateAgendaMutation } from '@services/agenda/agenda';
 
 const CreateAgendaPage = () => {
@@ -30,8 +30,16 @@ const CreateAgendaPage = () => {
   };
 
   const handleDeleteAgenda = () => dispatch(openDialog('deleteAgenda'));
-  const handlePublishAgenda = () =>
-    dispatch(openToast({ text: 'Agenda was successfully published', variant: 'default', action: 'copyLink' }));
+  const handlePublishAgenda = async () => {
+    const publishedAgenda: Agenda = { ...editedAgenda, status: 'PUBLISHED' };
+    try {
+      await createAgenda(publishedAgenda).unwrap();
+    } catch {
+      dispatch(openToast({ text: 'Error', variant: 'error' }));
+    }
+    if (result.isSuccess) dispatch(openToast({ text: 'Agenda was published successfully', variant: 'default' }));
+    if (result.isError) dispatch(openToast({ text: 'Error', variant: 'error' }));
+  };
 
   return (
     <div>
