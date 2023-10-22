@@ -26,3 +26,8 @@ export const getRole = (userId: string, owner_id: string, coowners_id: string[])
   if (coowners_id.indexOf(userId) !== -1) return 'Co-org';
   return 'Viewer';
 };
+
+export const uppercaseToCapital = (text: string): string => {
+  const lowercase = text.toLowerCase();
+  return lowercase.charAt(0).toUpperCase() + lowercase.slice(1);
+};

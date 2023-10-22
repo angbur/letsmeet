@@ -43,7 +43,7 @@ const AddNewTimeblock = () => {
   };
 
   return (
-    <Box width="55rem">
+    <Box width="45rem">
       <Box
         display="flex"
         justifyContent="space-between"
@@ -65,13 +65,13 @@ const AddNewTimeblock = () => {
         gap="1rem"
         width="100%"
       >
-        <Box display="flex" width="100%" gap="2%">
+        <Box display="flex" width="100%" gap="3%">
           <LocalizationProvider dateAdapter={AdapterMoment}>
             <TimePicker
               label="Start time*"
               value={startTime}
               onChange={(newValue) => setStartTime(newValue)}
-              sx={{ width: '40%' }}
+              sx={{ width: '60%' }}
             />
           </LocalizationProvider>
           <Controller
@@ -85,7 +85,7 @@ const AddNewTimeblock = () => {
                 onChange={onChange}
                 value={value}
                 type="number"
-                sx={{ width: '23%' }}
+                sx={{ width: '37%' }}
                 placeholder="ex. 15"
                 helperText={'In minutes'}
                 label="Duration*"
@@ -102,7 +102,7 @@ const AddNewTimeblock = () => {
             <TextField
               select
               label="Timeblock type*"
-              sx={{ width: '65%' }}
+              sx={{ width: '100%' }}
               error={!!error}
               onChange={onChange}
               value={value}
@@ -134,7 +134,7 @@ const AddNewTimeblock = () => {
               error={!!error}
               onChange={onChange}
               value={value}
-              sx={{ width: '65%' }}
+              sx={{ width: '100%' }}
               placeholder="Insert title here"
               helperText={'Max. 80 characters'}
               label="Title of timeblock*"
@@ -148,11 +148,11 @@ const AddNewTimeblock = () => {
           rows={3}
           placeholder="Insert description here"
           helperText={'Max. 140 characters'}
-          sx={{ width: '65%' }}
+          sx={{ width: '100%' }}
           {...register('description')}
         />
         <Box display="flex" gap="2.4rem">
-          <Box width="65%" display="flex" flexDirection="column" gap="1rem">
+          <Box width="100%" display="flex" flexDirection="column" sx={{ rowGap: '1rem' }}>
             <TextField
               id="location"
               label="Location"
@@ -169,7 +169,7 @@ const AddNewTimeblock = () => {
               {...register('additionalInfo')}
             />
           </Box>
-          <Box>map</Box>
+          <Box></Box>
         </Box>
         <DialogActions>
           <Button variant="text" onClick={handleClose}>

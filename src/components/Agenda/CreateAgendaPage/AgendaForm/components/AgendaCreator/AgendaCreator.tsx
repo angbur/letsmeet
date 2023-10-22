@@ -18,7 +18,7 @@ export type DisplayedHours = (typeof displayedHours)[number];
 const AgendaCreator = () => {
   const dispatch = useDispatch();
   const { palette } = useTheme();
-  const days: string[] = ['20.10.2023', '22.10.2023'];
+  const days: string[] = ['20.10.2023', '23.10.2023'];
   const [tab, setTab] = useState(days[0]);
   const [hoursRange, setHoursRange] = useState(displayedHours[0]);
   const currentDate = moment(tab, 'DD.MM.YYYY');
