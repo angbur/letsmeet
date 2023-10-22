@@ -7,7 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import AgendaList from '@components/Agenda/AgendaList/AgendaList';
 
 const AllAgendasPage = () => {
-  const { agendasList, error, isLoading } = useAgendasList({ numberOfAgendas: 5 });
+  const { agendasList, error, isLoading } = useAgendasList({ numberOfAgendas: 10 });
 
   return (
     <AgendasPageTemplate title="All agendas">
