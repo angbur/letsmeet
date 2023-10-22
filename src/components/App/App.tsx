@@ -9,10 +9,12 @@ import CreateAgendaPage from '@components/Agenda/CreateAgendaPage/CreateAgendaPa
 import AllAgendasPage from '@components/Agenda/AllAgendasPage/AllAgendasPage';
 import MyAgendasPage from '@components/Agenda/MyAgendasPage/MyAgendasPage';
 import MainDialog from '@components/Dialog/MainDialog';
+import Toast from '@components/Toast/Toast';
 
 const App = () => (
   <Fragment>
     <MainDialog />
+    <Toast />
     <Header />
     <Box sx={{ padding: '3.188rem 1.5rem 1.5rem' }}>
       <Routes>
