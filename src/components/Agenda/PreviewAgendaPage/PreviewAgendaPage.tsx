@@ -38,17 +38,29 @@ const PreviewAgendaPage = ({ themeColor }: PreviewAgendaProps) => {
         backgroundColor: palette.primary.light,
         minHeight: '100vh',
         zIndex: 100,
-        width: '70%',
+        width: { xs: '100%', sm: '70%' },
       }}
     >
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
         <Typography variant="h2">Ship IT Hackathon</Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '1rem' }}>
-          <Typography>If you have any question</Typography>
-          <Button sx={{ color: primaryColor, borderColor: primaryColor }} variant="outlined">
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            gap: '1rem',
+            margin: { xs: '0', sm: '1rem' },
+            padding: { xs: '0', sm: '1rem' },
+          }}
+        >
+          <Typography sx={{ display: { xs: 'none', sm: 'block' } }}>If you have any question</Typography>
+          <Button
+            sx={{ color: primaryColor, borderColor: primaryColor, display: { xs: 'none', sm: 'block' } }}
+            variant="outlined"
+          >
             Contact us
           </Button>
-          <Button sx={{ backgroundColor: primaryColor }}>Download PDF</Button>
+          <Button sx={{ backgroundColor: primaryColor, display: { xs: 'none', sm: 'block' } }}>Download PDF</Button>
         </Box>
       </Box>
       <Box

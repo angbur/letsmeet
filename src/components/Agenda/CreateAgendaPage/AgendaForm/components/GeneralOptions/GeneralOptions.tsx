@@ -23,8 +23,8 @@ const GeneralOptions = () => {
   const visitsTypes = visits.map((visit) => visit.charAt(0).toUpperCase() + visit.slice(1));
   const [startDate, setStartDate] = useState<Moment | null>(moment(new Date()));
   const [endDate, setEndDate] = useState<Moment | null>(moment(new Date()));
-  const [german, setGerman] = useState<boolean>(true);
-  const [polish, setPolish] = useState<boolean>(true);
+  const [german, setGerman] = useState<boolean>(false);
+  const [polish, setPolish] = useState<boolean>(false);
   const newAgenda = useSelector(selectEditedAgenda);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
