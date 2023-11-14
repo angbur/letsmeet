@@ -8,16 +8,32 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import PreviewTimeblock from './components/PreviewTimeblock/PreviewTimeblock';
 import { firstDay, secondDay } from './mockTimeblocks';
+import { useParams } from 'react-router-dom';
+import { useGetAgendaByIdQuery } from '@services/agenda/agenda';
+import moment from 'moment';
 
 type PreviewAgendaProps = {
   themeColor?: string;
 };
 
+const getDatesArrayFromStartDateAndEndDate = (startDate: string, endDate: string) => {
+  const dates = [];
+  const currDate = moment(startDate).startOf('day');
+  const lastDate = moment(endDate).startOf('day');
+  while (currDate.add(1, 'days').diff(lastDate) < 0) {
+    dates.push(currDate.clone().format('DD.MM.YYYY'));
+  }
+  return dates;
+};
+
 const PreviewAgendaPage = ({ themeColor }: PreviewAgendaProps) => {
+  const { id } = useParams();
+  const { data } = useGetAgendaByIdQuery(id);
   const { palette } = useTheme();
   const primaryColor = themeColor ? themeColor : palette.primary.main;
-  const days: string[] = ['20.10.2023', '23.10.2023'];
-
+  const days: string[] = data
+    ? getDatesArrayFromStartDateAndEndDate(data.data.start_date, data.data.end_date)
+    : ['20.10.2023', '23.10.2023'];
   const [tab, setTab] = useState(days[0]);
 
   const handleChangeTab = (event: React.SyntheticEvent, newValue: string) => setTab(newValue);
@@ -42,7 +58,7 @@ const PreviewAgendaPage = ({ themeColor }: PreviewAgendaProps) => {
       }}
     >
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-        <Typography variant="h2">Ship IT Hackathon</Typography>
+        <Typography variant="h2">{data ? data.data.name : 'Title'}</Typography>
         <Box
           sx={{
             display: 'flex',
@@ -76,7 +92,9 @@ const PreviewAgendaPage = ({ themeColor }: PreviewAgendaProps) => {
           Last updated:
         </Typography>
         <Box>
-          <Typography>19.10.2023</Typography>
+          <Typography>
+            {data ? moment(data.data.start_date).format('dddd, MMMM Do YYYY, h:mm:ss a') : 'Date'}
+          </Typography>
         </Box>
       </Box>
       <Box sx={{ marginBottom: '2.75rem' }}>
@@ -84,13 +102,7 @@ const PreviewAgendaPage = ({ themeColor }: PreviewAgendaProps) => {
           Description
         </Typography>
         <Box>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
-          </Typography>
+          <Typography>{data ? data.data.description : 'Description'}</Typography>
         </Box>
       </Box>
       <Box>

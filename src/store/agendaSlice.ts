@@ -56,6 +56,9 @@ const agendaSlice = createSlice({
     updateNewAgenda: (state, action) => {
       state.editedAgenda = { ...state.editedAgenda, ...action.payload };
     },
+    setDefaultAgenda: (state) => {
+      state.editedAgenda = defaultAgenda;
+    },
   },
   extraReducers: (builder) => {
     builder.addMatcher(agendaApi.endpoints.getAllAgendas.matchFulfilled, (state, { payload }) => {
@@ -87,6 +90,6 @@ const agendaSlice = createSlice({
 
 export default agendaSlice.reducer;
 
-export const { updateNewAgenda } = agendaSlice.actions;
+export const { updateNewAgenda, setDefaultAgenda } = agendaSlice.actions;
 
 export const selectEditedAgenda = (state: RootState) => state.agenda.editedAgenda;

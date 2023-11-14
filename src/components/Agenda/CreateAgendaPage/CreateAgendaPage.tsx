@@ -17,30 +17,33 @@ const CreateAgendaPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const editedAgenda = useSelector(selectEditedAgenda);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { last_updated, id, ...draftAgenda } = editedAgenda;
+  draftAgenda.start_date = draftAgenda.start_date ? new Date(draftAgenda.start_date).toISOString() : '';
+  draftAgenda.end_date = draftAgenda.end_date ? new Date(draftAgenda.end_date).toISOString() : '';
+  draftAgenda.owner_id = '1';
   const [createAgenda, result] = useCreateAgendaMutation();
 
   const handleDraftAgenda = async () => {
-    /* try {
-      await createAgenda(editedAgenda).unwrap();
+    try {
+      await createAgenda(draftAgenda).unwrap();
     } catch {
       dispatch(openToast({ text: 'Error', variant: 'error' }));
     }
     if (result.isSuccess) dispatch(openToast({ text: 'Agenda was saved successfully as a draft', variant: 'default' }));
-    if (result.isError) dispatch(openToast({ text: 'Error', variant: 'error' })); */
-    dispatch(openToast({ text: 'Agenda was saved successfully as a draft', variant: 'default' }));
+    if (result.isError) dispatch(openToast({ text: 'Error', variant: 'error' }));
   };
 
   const handleDeleteAgenda = () => dispatch(openDialog('deleteAgenda'));
   const handlePublishAgenda = async () => {
-    const publishedAgenda: Agenda = { ...editedAgenda, status: 'PUBLISHED' };
-    /* try {
+    const publishedAgenda: Omit<Agenda, 'last_updated' | 'id'> = { ...draftAgenda, status: 'PUBLISHED' };
+    try {
       await createAgenda(publishedAgenda).unwrap();
     } catch {
       dispatch(openToast({ text: 'Error', variant: 'error' }));
-    } */
-    //if (result.isSuccess) dispatch(openToast({ text: 'Agenda was published successfully', variant: 'default' }));
-    //if (result.isError) dispatch(openToast({ text: 'Error', variant: 'error' }));
-    dispatch(openToast({ text: 'Agenda was published successfully', variant: 'default' }));
+    }
+    if (result.isSuccess) dispatch(openToast({ text: 'Agenda was published successfully', variant: 'default' }));
+    if (result.isError) dispatch(openToast({ text: 'Error', variant: 'error' }));
   };
 
   return (
