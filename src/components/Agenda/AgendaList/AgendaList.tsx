@@ -71,8 +71,7 @@ const AgendaList = ({ agendasList, recentAgendas }: AgendaListProps) => {
 
   const handlePreview = (link: string, agendaId: string) => {
     //window.open(link, '_blank');
-    window.open(`http://letsmeet-rho.vercel.app/agenda/${agendaId}`, '_blank');
-    //window.open(`http://localhost:5173/agenda/${agendaId}`, '_blank');
+    navigate(`/agenda/${agendaId}`);
   };
 
   const userId = '1';

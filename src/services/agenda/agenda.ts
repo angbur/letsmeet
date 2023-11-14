@@ -21,7 +21,7 @@ export const agendaApi = createApi({
     }),
     createAgenda: builder.mutation<{ data: Agenda }, Partial<Agenda>>({
       query: (body) => ({
-        url: '/create_agenda',
+        url: '/update_agenda',
         method: 'POST',
         body,
       }),
@@ -51,8 +51,8 @@ export const agendaApi = createApi({
 
 export const {
   useGetAllAgendasQuery,
-  useCreateAgendaMutation,
   useUpdateAgendaMutation,
   useDeleteAgendaMutation,
   useGetAgendaByIdQuery,
+  useCreateAgendaMutation,
 } = agendaApi;
