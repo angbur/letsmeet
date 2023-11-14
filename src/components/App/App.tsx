@@ -55,6 +55,8 @@ const App = () => {
           <Route path={routes.myAgendas} element={<MyAgendasPage />}></Route>
           <Route path={routes.allAgendas} element={<AllAgendasPage />}></Route>
           <Route path={routes.previewAgenda} element={<PreviewAgendaPage themeColor={setThemeColor(theme)} />}></Route>
+          <Route path={routes.viewCreatedAgenda} element={<PreviewAgendaPage />}></Route>
+          <Route path="*" element={<HomePage />}></Route>
         </Routes>
       </Box>
     </Fragment>

@@ -6,9 +6,13 @@ import { IconButton } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const { palette } = useTheme();
+  const navigate = useNavigate();
+
+  const handleHomePage = () => navigate('/');
 
   return (
     <AppBar position="static" sx={{ backgroundColor: palette.secondary.light }} elevation={0}>
@@ -16,7 +20,14 @@ const Header = () => {
         <Box display="flex" alignItems="center" justifyContent="center" sx={{ display: { xs: 'none', sm: 'block' } }}>
           <img src="/assets/images/cap_logo_standard.svg" alt="Capgemini logo" height={64} />
         </Box>
-        <Box display="flex" justifyContent="center" alignItems="center" gap="0.5rem">
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          gap="0.5rem"
+          onClick={handleHomePage}
+          sx={{ cursor: 'pointer' }}
+        >
           <img src="/assets/icons/logo_icon.svg" alt="" height={36} />
           <Typography variant="h1" color="primary">
             let&apos;s meet

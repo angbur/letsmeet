@@ -5,6 +5,8 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import { useNavigate } from 'react-router-dom';
 import routes from '@components/App/routing/routes';
 import Typography from '@mui/material/Typography';
+import { setDefaultAgenda } from '@store/agendaSlice';
+import { useDispatch } from 'react-redux';
 
 type AgendasPageTemplateProps = {
   title: string;
@@ -12,6 +14,12 @@ type AgendasPageTemplateProps = {
 
 const AgendasPageTemplate = ({ title, children }: PropsWithChildren<AgendasPageTemplateProps>) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleCreateNewAgenda = () => {
+    dispatch(setDefaultAgenda());
+    navigate(routes.newAgenda);
+  };
 
   return (
     <Box>
@@ -31,7 +39,7 @@ const AgendasPageTemplate = ({ title, children }: PropsWithChildren<AgendasPageT
         sx={{ padding: '0.5rem 0 2.813rem' }}
       >
         <Typography variant="h2">{title}</Typography>
-        <Button onClick={() => navigate(routes.newAgenda)}>Create new</Button>
+        <Button onClick={handleCreateNewAgenda}>Create new</Button>
       </Box>
       <div>{children}</div>
     </Box>

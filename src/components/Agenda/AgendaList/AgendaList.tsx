@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { styled } from '@mui/material';
 import { Agenda, updateNewAgenda } from '@store/agendaSlice';
 import Table from '@mui/material/Table';
@@ -19,6 +19,8 @@ import { openDialog } from '@store/dialogSlice';
 import { useGetAgendaByIdQuery } from '@services/agenda/agenda';
 import { useNavigate } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
+import { ShareOutlined, VisibilityOutlined } from '@mui/icons-material';
+import { openToast } from '@store/toastSlice';
 
 const TableHeadCell = styled(TableCell)({
   fontWeight: 600,
@@ -60,6 +62,19 @@ const AgendaList = ({ agendasList, recentAgendas }: AgendaListProps) => {
     if (isSuccess) dispatch(updateNewAgenda(data));
   };
 
+  const handleCopyLink = (link: string, agendaId: string) => {
+    //navigator.clipboard.writeText(link);
+    //navigator.clipboard.writeText(`http://letsmeet-rho.vercel.app/agenda/${agendaId}`);
+    navigator.clipboard.writeText(`http://localhost:5173/agenda/${agendaId}`);
+    dispatch(openToast({ text: 'Link copied to clipboard', variant: 'default' }));
+  };
+
+  const handlePreview = (link: string, agendaId: string) => {
+    //window.open(link, '_blank');
+    //window.open(`http://letsmeet-rho.vercel.app/agenda/${agendaId}`, '_blank');
+    window.open(`http://localhost:5173/agenda/${agendaId}`, '_blank');
+  };
+
   const userId = '1';
 
   if (isSuccess) navigate('/new-agenda');
@@ -74,6 +89,7 @@ const AgendaList = ({ agendasList, recentAgendas }: AgendaListProps) => {
               <TableHeadCell>DETAILS</TableHeadCell>
               <TableHeadCell>STATE</TableHeadCell>
               <TableHeadCell>ROLE</TableHeadCell>
+              <TableHeadCell />
               <TableHeadCell />
             </TableRow>
           </TableHead>
@@ -133,6 +149,21 @@ const AgendaList = ({ agendasList, recentAgendas }: AgendaListProps) => {
                       <ModeEditOutlineOutlinedIcon sx={{ color: 'black' }} />
                     </IconButton>
                   )}
+                  {agenda.status === 'DRAFT' ? (
+                    <IconButton aria-label="delete" onClick={handleDeleteAgenda}>
+                      <DeleteOutlineOutlinedIcon sx={{ color: 'black' }} />
+                    </IconButton>
+                  ) : null}
+                  {agenda.status === 'PUBLISHED' ? (
+                    <Fragment>
+                      <IconButton aria-label="link" onClick={() => handleCopyLink(agenda.link, agenda.id)}>
+                        <ShareOutlined sx={{ color: 'black' }} />
+                      </IconButton>
+                      <IconButton aria-label="preview" onClick={() => handlePreview(agenda.link, agenda.id)}>
+                        <VisibilityOutlined sx={{ color: 'black' }} />
+                      </IconButton>
+                    </Fragment>
+                  ) : null}
                 </TableCell>
               </TableRow>
             ))}
