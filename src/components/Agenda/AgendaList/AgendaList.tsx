@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@mui/material';
-import { Agenda } from '@store/agendaSlice';
+import { Agenda, updateNewAgenda } from '@store/agendaSlice';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -16,6 +16,9 @@ import { calculateDaysLeft, getRole, parseDate, parseLastUpdatedDate } from 'src
 import AgendaOptionsDropdown from '../AgendaOptionsDropdown/AgendaOptionsDropdown';
 import { useDispatch } from 'react-redux';
 import { openDialog } from '@store/dialogSlice';
+import { useGetAgendaByIdQuery } from '@services/agenda/agenda';
+import { useNavigate } from 'react-router-dom';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const TableHeadCell = styled(TableCell)({
   fontWeight: 600,
@@ -46,11 +49,20 @@ const defaultProps = {
 
 const AgendaList = ({ agendasList, recentAgendas }: AgendaListProps) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [agendaId, setAgendaId] = useState<string>('');
+  const { data, isSuccess, isLoading } = useGetAgendaByIdQuery(agendaId);
+
   const handleDeleteAgenda = () => dispatch(openDialog('deleteAgenda'));
 
-  // delete these later
-  const isPublished = true;
+  const handleEditAgenda = (agendaId: string) => {
+    setAgendaId(agendaId);
+    if (isSuccess) dispatch(updateNewAgenda(data));
+  };
+
   const userId = '1';
+
+  if (isSuccess) navigate('/new-agenda');
 
   return (
     <div className="AgendaList" style={{ width: '100%' }}>
@@ -112,6 +124,15 @@ const AgendaList = ({ agendasList, recentAgendas }: AgendaListProps) => {
                     ) : null}
                     {recentAgendas === false ? <AgendaOptionsDropdown /> : null}
                   </span>
+                </TableCell>
+                <TableCell>
+                  {isLoading && agendaId === agenda.id ? (
+                    <CircularProgress />
+                  ) : (
+                    <IconButton aria-label="edit" onClick={() => handleEditAgenda(agenda.id)}>
+                      <ModeEditOutlineOutlinedIcon sx={{ color: 'black' }} />
+                    </IconButton>
+                  )}
                 </TableCell>
               </TableRow>
             ))}

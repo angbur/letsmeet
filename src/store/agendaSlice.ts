@@ -34,6 +34,7 @@ const defaultAgenda: Agenda = {
   coowners_ids: [],
   last_updated: '',
   status: 'DRAFT',
+  id: '',
 };
 
 type AgendaState = {
@@ -70,6 +71,16 @@ const agendaSlice = createSlice({
     builder.addMatcher(agendaApi.endpoints.createAgenda.matchFulfilled, (state, { payload }) => {
       state.agendas.push(payload.data);
       state.status = 'idle';
+    });
+    builder.addMatcher(agendaApi.endpoints.getAgendaById.matchPending, (state) => {
+      state.status = 'loading';
+    });
+    builder.addMatcher(agendaApi.endpoints.getAgendaById.matchFulfilled, (state, { payload }) => {
+      state.editedAgenda = payload.data;
+      state.status = 'idle';
+    });
+    builder.addMatcher(agendaApi.endpoints.getAgendaById.matchRejected, (state) => {
+      state.status = 'failed';
     });
   },
 });
