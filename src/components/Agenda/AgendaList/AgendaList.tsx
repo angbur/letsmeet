@@ -64,15 +64,15 @@ const AgendaList = ({ agendasList, recentAgendas }: AgendaListProps) => {
 
   const handleCopyLink = (link: string, agendaId: string) => {
     //navigator.clipboard.writeText(link);
-    //navigator.clipboard.writeText(`http://letsmeet-rho.vercel.app/agenda/${agendaId}`);
-    navigator.clipboard.writeText(`http://localhost:5173/agenda/${agendaId}`);
+    navigator.clipboard.writeText(`http://letsmeet-rho.vercel.app/agenda/${agendaId}`);
+    //navigator.clipboard.writeText(`http://localhost:5173/agenda/${agendaId}`);
     dispatch(openToast({ text: 'Link copied to clipboard', variant: 'default' }));
   };
 
   const handlePreview = (link: string, agendaId: string) => {
     //window.open(link, '_blank');
-    //window.open(`http://letsmeet-rho.vercel.app/agenda/${agendaId}`, '_blank');
-    window.open(`http://localhost:5173/agenda/${agendaId}`, '_blank');
+    window.open(`http://letsmeet-rho.vercel.app/agenda/${agendaId}`, '_blank');
+    //window.open(`http://localhost:5173/agenda/${agendaId}`, '_blank');
   };
 
   const userId = '1';
