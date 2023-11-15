@@ -1,12 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Agenda } from '@store/agendaSlice';
 
-const baseUrl = 'https://letsmeet-35f25f0de361.herokuapp.com';
+const prodBaseUrl = 'https://letsmeet-35f25f0de361.herokuapp.com';
+const localBaseUrl = 'http://127.0.0.1:5000';
+
+const isDev = import.meta.env.VITE_IS_DEV;
 
 export const agendaApi = createApi({
   reducerPath: 'agendaApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${baseUrl}`,
+    baseUrl: isDev === 'true' ? localBaseUrl : prodBaseUrl,
     prepareHeaders: (headers) => {
       headers.set('Access-Control-Allow-Origin', '*');
       return headers;
@@ -21,7 +24,7 @@ export const agendaApi = createApi({
     }),
     createAgenda: builder.mutation<{ data: Agenda }, Partial<Agenda>>({
       query: (body) => ({
-        url: '/update_agenda',
+        url: '/create_agenda',
         method: 'POST',
         body,
       }),
