@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
@@ -12,11 +12,13 @@ import { openDialog } from '@store/dialogSlice';
 import { openToast } from '@store/toastSlice';
 import { Agenda, selectEditedAgenda } from '@store/agendaSlice';
 import { useCreateAgendaMutation, useUpdateAgendaMutation } from '@services/agenda/agenda';
+import { setDefaultAgenda } from '@store/agendaSlice';
 
 const CreateAgendaPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const editedAgenda = useSelector(selectEditedAgenda);
+  const [isSaved, setIsSaved] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { last_updated, id, ...draftAgenda } = editedAgenda;
   draftAgenda.start_date = draftAgenda.start_date ? new Date(draftAgenda.start_date).toISOString() : '';
@@ -28,6 +30,7 @@ const CreateAgendaPage = () => {
   const handleDraftAgenda = async () => {
     try {
       await createAgenda(draftAgenda).unwrap();
+      setIsSaved(true);
     } catch {
       dispatch(openToast({ text: 'Error', variant: 'error' }));
     }
@@ -41,6 +44,8 @@ const CreateAgendaPage = () => {
     const publishedAgenda: Omit<Agenda, 'last_updated' | 'id'> = { ...draftAgenda, status: 'PUBLISHED' };
     try {
       await updateAgenda(publishedAgenda).unwrap();
+      dispatch(setDefaultAgenda());
+      navigate(routes.homepage);
     } catch {
       dispatch(openToast({ text: 'Error', variant: 'error' }));
     }
@@ -70,7 +75,7 @@ const CreateAgendaPage = () => {
           <Button variant="text" sx={{ padding: '0.75rem' }} onClick={handleDeleteAgenda}>
             Delete
           </Button>
-          <Button variant="outlined" onClick={handlePublishAgenda}>
+          <Button disabled={!isSaved} variant="outlined" onClick={handlePublishAgenda}>
             Publish
           </Button>
           <Button onClick={handleDraftAgenda}>Save as draft</Button>
