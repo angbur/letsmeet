@@ -50,8 +50,9 @@ const Navigation = () => {
           },
         }}
       >
-        {Object.keys(routes).map((route) => {
-          if (route !== 'previewAgenda') {
+        {Object.keys(routes)
+          .slice(0, 4)
+          .map((route) => {
             return (
               <ListItemButton
                 selected={routes[route] === pathname}
@@ -63,8 +64,7 @@ const Navigation = () => {
                 <Typography variant="h6">{navigationLabels[route]}</Typography>
               </ListItemButton>
             );
-          }
-        })}
+          })}
       </List>
       <Divider sx={{ marginTop: '0.5rem' }} />
       <Typography variant="h6" sx={{ padding: '1.125rem 1rem' }}>
