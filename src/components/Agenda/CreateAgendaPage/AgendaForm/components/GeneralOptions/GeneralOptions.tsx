@@ -17,7 +17,11 @@ import type { Moment } from 'moment';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 
-const GeneralOptions = () => {
+type GeneralOptionsProps = {
+  isSaved: boolean;
+};
+
+const GeneralOptions = ({ isSaved }: GeneralOptionsProps) => {
   const dispatch = useDispatch();
   const { palette } = useTheme();
   const visitsTypes = visits.map((visit) => visit.charAt(0).toUpperCase() + visit.slice(1));
@@ -62,6 +66,7 @@ const GeneralOptions = () => {
       </StyledFormSectionTitle>
       <Box display={'flex'} flexDirection={'column'} mb={8} width={'100%'} gap={'2rem'}>
         <TextField
+          disabled={isSaved}
           id="type"
           name="type"
           select
@@ -81,6 +86,7 @@ const GeneralOptions = () => {
           ))}
         </TextField>
         <TextField
+          disabled={isSaved}
           error={false}
           id="name"
           name="name"
@@ -93,6 +99,7 @@ const GeneralOptions = () => {
           sx={{ width: '80%' }}
         />
         <TextField
+          disabled={isSaved}
           id="description"
           name="description"
           label="Description"
@@ -106,6 +113,7 @@ const GeneralOptions = () => {
           sx={{ width: '80%' }}
         />
         <TextField
+          disabled={isSaved}
           error={false}
           id="link"
           name="link"
@@ -113,7 +121,7 @@ const GeneralOptions = () => {
           onChange={(event) => handleUpdateNewAgenda(event)}
           label="Link"
           required
-          disabled
+          // disabled
           sx={{ width: '80%' }}
         />
       </Box>

@@ -14,7 +14,11 @@ const ownersArray = [{ firstName: 'Ania', lastName: 'Kowalska', email: 'anna.kow
 const coorgsArray = [{ firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', id: '2' }];
 const viewersArray = [];
 
-const AgendaAccesses = () => {
+type AgendaAccessesProps = {
+  isSaved: boolean;
+};
+
+const AgendaAccesses = ({ isSaved }: AgendaAccessesProps) => {
   const dispatch = useDispatch();
   const { palette } = useTheme();
   const [owners, setOwners] = useState(ownersArray);

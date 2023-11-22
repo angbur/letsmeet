@@ -31,7 +31,7 @@ export const agendaApi = createApi({
     }),
     updateAgenda: builder.mutation<{ data: Agenda }, Partial<Agenda>>({
       query: (body) => ({
-        url: '/update_agenda',
+        url: `/update_agenda`,
         method: 'PUT',
         body,
       }),

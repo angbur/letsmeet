@@ -6,16 +6,20 @@ import GeneralOptions from '../AgendaForm/components/GeneralOptions/GeneralOptio
 import AgendaTheme from '../AgendaForm/components/AgendaTheme/AgendaTheme';
 import AgendaAccesses from '../AgendaForm/components/AgendaAccesses/AgendaAccesses';
 
-const CreateAgendaContent = () => {
+type CreateAgendaContentProps = {
+  isSaved: boolean;
+};
+
+const CreateAgendaContent = ({ isSaved }: CreateAgendaContentProps) => {
   const details = useSelector(selectDetails);
   const accesses = useSelector(selectAccesses);
 
   return (
     <Fragment>
-      {details['general options'].active && <GeneralOptions />}
-      {details['agenda creator'].active && <AgendaCreator />}
-      {details.theme.active && <AgendaTheme />}
-      {accesses.accesses.active && <AgendaAccesses />}
+      {details['general options'].active && <GeneralOptions isSaved={isSaved} />}
+      {details['agenda creator'].active && <AgendaCreator isSaved={isSaved} />}
+      {details.theme.active && <AgendaTheme isSaved={isSaved} />}
+      {accesses.accesses.active && <AgendaAccesses isSaved={isSaved} />}
     </Fragment>
   );
 };
