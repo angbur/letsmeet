@@ -6,6 +6,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
 import PreviewTimeblock from './components/PreviewTimeblock/PreviewTimeblock';
 import { firstDay, secondDay } from './mockTimeblocks';
 import { useParams } from 'react-router-dom';
@@ -33,7 +34,7 @@ const PreviewAgendaPage = ({ themeColor }: PreviewAgendaProps) => {
   const primaryColor = themeColor ? themeColor : palette.primary.main;
   const days: string[] = data
     ? getDatesArrayFromStartDateAndEndDate(data.data.start_date, data.data.end_date)
-    : ['20.10.2023', '23.10.2023'];
+    : ['21.10.2023', '23.10.2023'];
   const [tab, setTab] = useState(days[0]);
 
   const handleChangeTab = (event: React.SyntheticEvent, newValue: string) => setTab(newValue);
@@ -48,61 +49,40 @@ const PreviewAgendaPage = ({ themeColor }: PreviewAgendaProps) => {
 
   return (
     <Box
+      p={0}
       sx={{
-        padding: '2rem',
-        margin: 'auto',
         backgroundColor: palette.primary.light,
         minHeight: '100vh',
+        borderRadius: '12px',
         zIndex: 100,
         width: { xs: '100%', sm: '70%' },
       }}
     >
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-        <Typography variant="h2">{data ? data.data.name : 'Title'}</Typography>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            gap: '1rem',
-            margin: { xs: '0', sm: '1rem' },
-            padding: { xs: '0', sm: '1rem' },
-          }}
-        >
-          <Typography sx={{ display: { xs: 'none', sm: 'block' } }}>If you have any question</Typography>
-          <Button
-            sx={{ color: primaryColor, borderColor: primaryColor, display: { xs: 'none', sm: 'block' } }}
-            variant="outlined"
-          >
-            Contact us
-          </Button>
-          <Button sx={{ backgroundColor: primaryColor, display: { xs: 'none', sm: 'block' } }}>Download PDF</Button>
+      <Box display={'flex'} flexDirection={'column'} gap={'1.5rem'} sx={{ padding: { xs: '1rem', sm: '2rem' } }}>
+        <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'}>
+          <Typography variant="h2">{data ? data.data.name : 'Title'}</Typography>
+          <Box display={'flex'} gap={'1rem'} alignItems={'center'}>
+            <Typography sx={{ display: { xs: 'none', sm: 'block' } }}>If you have any question</Typography>
+            <Button
+              sx={{ color: primaryColor, borderColor: primaryColor, display: { xs: 'none', sm: 'block' } }}
+              variant="outlined"
+            >
+              Contact us
+            </Button>
+            <Button sx={{ backgroundColor: primaryColor, display: { xs: 'none', sm: 'block' } }}>Download PDF</Button>
+          </Box>
         </Box>
-      </Box>
-      <Box
-        sx={{
-          gap: '0.5rem',
-          display: 'flex',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-          marginBottom: '1.5rem',
-        }}
-      >
-        <Typography variant="h4" sx={{ fontWeight: 500 }}>
-          Last updated:
-        </Typography>
-        <Box>
-          <Typography>
-            {data ? moment(data.data.start_date).format('dddd, MMMM Do YYYY, h:mm:ss a') : 'Date'}
+        <Box display={'flex'} gap={'0.5rem'} alignItems={'center'} justifyContent={'flex-start'}>
+          <Typography variant="h4" sx={{ fontWeight: 500 }}>
+            Last updated:
           </Typography>
+          <Typography>{data ? moment(data.data.start_date).format('DD.MM.YYYY') : 'Date'}</Typography>
         </Box>
-      </Box>
-      <Box sx={{ marginBottom: '2.75rem' }}>
-        <Typography variant="h4" sx={{ fontWeight: 500 }}>
-          Description
-        </Typography>
         <Box>
-          <Typography>{data ? data.data.description : 'Description'}</Typography>
+          <Typography variant="h4" sx={{ fontWeight: 500 }}>
+            Description
+          </Typography>
+          <Typography paragraph>{data ? data.data.description : 'Description'}</Typography>
         </Box>
       </Box>
       <Box>
@@ -122,15 +102,11 @@ const PreviewAgendaPage = ({ themeColor }: PreviewAgendaProps) => {
             <Tab key={day} label={day} value={day} />
           ))}
         </StyledTabs>
+        <Divider />
       </Box>
-      {tab === '20.10.2023'
-        ? firstDay.map((timeblock) => (
-            <PreviewTimeblock key={timeblock.id} timeblock={timeblock} themeColor={primaryColor} />
-          ))
-        : secondDay.map((timeblock) => (
-            <PreviewTimeblock key={timeblock.id} timeblock={timeblock} themeColor={primaryColor} />
-          ))}
-      <Box></Box>
+      {(tab === '21.10.2023' ? firstDay : secondDay).map((timeblock) => (
+        <PreviewTimeblock key={timeblock.id} timeblock={timeblock} themeColor={'primary'} />
+      ))}
     </Box>
   );
 };

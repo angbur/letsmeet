@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Fragment } from 'react';
 import Header from '@components/Header/Header';
 import Box from '@mui/material/Box';
@@ -11,22 +11,31 @@ import MyAgendasPage from '@components/Agenda/MyAgendasPage/MyAgendasPage';
 import PreviewAgendaPage from '@components/Agenda/PreviewAgendaPage/PreviewAgendaPage';
 import MainDialog from '@components/Dialog/MainDialog';
 import Toast from '@components/Toast/Toast';
+import CircularProgress from '@mui/material/CircularProgress';
+
+const AsyncAgendaView = React.lazy(() => import('@components/Agenda/PreviewAgendaPage/PreviewAgendaPage'));
 
 const App = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const theme = queryParams.get('theme');
+  const isPreview = location.pathname.includes('preview');
+  const isAgendaView = location.pathname.includes('agenda-view');
 
   const setBackgroundImage = (theme) => {
-    switch (theme) {
-      case 'professional':
-        return `url('/assets/images/themes/professional.jpg')`;
-      case 'party':
-        return `url('/assets/images/themes/party.jpg')`;
-      case 'sky':
-        return `url('/assets/images/themes/sky.jpg')`;
-      default:
-        return '';
+    if (!isPreview && !isAgendaView) {
+      switch (theme) {
+        case 'professional':
+          return `url('/assets/images/themes/professional.jpg')`;
+        case 'party':
+          return `url('/assets/images/themes/party.jpg')`;
+        case 'sky':
+          return `url('/assets/images/themes/sky.jpg')`;
+        default:
+          return '';
+      }
+    } else {
+      return `url('/assets/images/themes/party.jpg')`;
     }
   };
 
@@ -48,14 +57,28 @@ const App = () => {
       <MainDialog />
       <Toast />
       <Header />
-      <Box sx={{ backgroundImage: setBackgroundImage(theme), padding: '3.188rem 1.5rem 1.5rem' }}>
+      <Box
+        p={2}
+        display={'flex'}
+        alignItems={'center'}
+        justifyContent={'center'}
+        width={'100%'}
+        sx={{ backgroundImage: setBackgroundImage(theme) }}
+      >
         <Routes>
           <Route path={routes.homepage} element={<HomePage />}></Route>
           <Route path={routes.newAgenda} element={<CreateAgendaPage />}></Route>
           <Route path={routes.myAgendas} element={<MyAgendasPage />}></Route>
           <Route path={routes.allAgendas} element={<AllAgendasPage />}></Route>
           <Route path={routes.previewAgenda} element={<PreviewAgendaPage themeColor={setThemeColor(theme)} />}></Route>
-          <Route path={routes.viewCreatedAgenda} element={<PreviewAgendaPage />}></Route>
+          <Route
+            path={routes.viewCreatedAgenda}
+            element={
+              <Suspense fallback={<CircularProgress />}>
+                <AsyncAgendaView />
+              </Suspense>
+            }
+          ></Route>
           <Route path="*" element={<HomePage />}></Route>
         </Routes>
       </Box>

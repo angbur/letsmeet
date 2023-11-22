@@ -4,16 +4,19 @@ declare module '@mui/material/styles' {
   interface Palette {
     tertiary: Palette['primary'];
     dark: Palette['primary'];
+    light: Palette['primary'];
   }
   interface PaletteOptions {
     tertiary?: PaletteOptions['primary'];
     dark?: PaletteOptions['primary'];
+    light?: PaletteOptions['primary'];
   }
 }
 declare module '@mui/material/Button' {
   interface ButtonPropsColorOverrides {
     tertiary: true;
     dark: true;
+    light: true;
   }
 }
 
@@ -47,6 +50,9 @@ const theme = createTheme({
       main: '#49454F',
       light: '#79747E',
     },
+    light: {
+      main: '#625B71',
+    },
     text: {
       primary: '#1C1B1F',
       secondary: '#49454F',
@@ -73,6 +79,9 @@ const theme = createTheme({
       color: '#000',
       fontWeight: 400,
       lineHeight: '127.273%',
+      '@media (max-width:600px)': {
+        fontSize: '1.5rem',
+      },
     },
     h3: {
       fontSize: '1.5rem',
@@ -99,6 +108,9 @@ const theme = createTheme({
       fontSize: '0.8rem',
       fontFamily: 'Roboto, sans-serif',
       color: '#000',
+    },
+    body1: {
+      fontSize: '0.875rem',
     },
   },
   components: {

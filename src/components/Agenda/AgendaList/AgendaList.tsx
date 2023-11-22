@@ -71,7 +71,7 @@ const AgendaList = ({ agendasList, recentAgendas }: AgendaListProps) => {
 
   const handlePreview = (link: string, agendaId: string) => {
     //window.open(link, '_blank');
-    navigate(`/agenda/${agendaId}`);
+    navigate(`/agenda-view/${agendaId}`);
   };
 
   const userId = '1';
