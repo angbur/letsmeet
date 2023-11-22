@@ -38,27 +38,21 @@ const PreviewTimeblock = ({ timeblock, themeColor }: TimeblockProps) => {
       justifyContent="flex-start"
       alignItems="start"
       width="100%"
-      sx={{ background: `${palette.primary.light}`, padding: '1.5rem' }}
+      sx={{ background: `${palette.primary.light}`, padding: '1.5rem', flexDirection: { xs: 'column', sm: 'row' } }}
     >
       <Box
         display="flex"
-        flexDirection="column"
         justifyContent="center"
         alignItems="start"
-        width="20%"
+        width="fit-content"
+        minWidth="20%"
         mt={isExpanded ? '0.7rem' : 0}
-        sx={{ transition: 'all 0.1s ease-out' }}
+        sx={{ transition: 'all 0.1s ease-out', flexDirection: { xs: 'row', sm: 'column' }, gap: { xs: '1rem', sm: 0 } }}
       >
-        <Typography
-          variant="caption"
-          color={primaryColor}
-          fontWeight={600}
-          fontSize={'0.8rem'}
-          sx={{ marginBottom: '0.5rem' }}
-        >
+        <Typography variant="caption" color={primaryColor} fontWeight={600} fontSize={'0.8rem'}>
           {timeRange}
         </Typography>
-        <Typography variant="caption" color="dark">
+        <Typography variant="caption" color={palette.light.main}>
           {timeblock.duration} min.
         </Typography>
       </Box>
@@ -66,7 +60,15 @@ const PreviewTimeblock = ({ timeblock, themeColor }: TimeblockProps) => {
         <Accordion sx={{ background: 'none', boxShadow: 'none' }} expanded={isExpanded}>
           <StyledAccordionSummary
             expandIcon={
-              <IconButton aria-label="delete" size="small" onClick={handleExpand}>
+              <IconButton
+                aria-label="delete"
+                size="small"
+                onClick={handleExpand}
+                sx={{
+                  position: 'relative',
+                  top: { xs: '-36px', sm: 0 },
+                }}
+              >
                 {isExpanded ? (
                   <RemoveIcon fontSize="small" sx={{ color: primaryColor }} />
                 ) : (
@@ -76,6 +78,7 @@ const PreviewTimeblock = ({ timeblock, themeColor }: TimeblockProps) => {
             }
             aria-controls="panel1a-content"
             id="panel1a-header"
+            sx={{ padding: 0 }}
           >
             <Box width="100%" display="flex" justifyContent="space-between" alignItems="center">
               <Box
@@ -95,7 +98,7 @@ const PreviewTimeblock = ({ timeblock, themeColor }: TimeblockProps) => {
               </Box>
             </Box>
           </StyledAccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails sx={{ padding: 0 }}>
             <Typography variant="caption" color="dark">
               <strong>Presenter</strong>: {timeblock.presenter_id}
             </Typography>

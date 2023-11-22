@@ -15,7 +15,7 @@ const HomePage = () => {
   const { agendasList, error, isLoading } = useAgendasList({ numberOfAgendas: 5 });
 
   return (
-    <Box display="flex" alignItems="baseline" style={{ gap: '3.125rem' }}>
+    <Box display="flex" alignItems="baseline" justifyContent={'space-between'} gap={'2rem'} width={'100%'}>
       <Navigation />
       <Box display="flex" flexDirection="column" alignItems="start" sx={{ gap: '1.5rem', flex: 1 }}>
         <Button startIcon={<AddIcon />} onClick={() => navigate(routes.newAgenda)}>
