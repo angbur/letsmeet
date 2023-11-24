@@ -17,7 +17,11 @@ const themes: ThemeType[] = [
   { name: 'sky', image: 'sky.jpg' },
 ];
 
-const AgendaTheme = () => {
+type AgendaThemeProps = {
+  isSaved: boolean;
+};
+
+const AgendaTheme = ({ isSaved }: AgendaThemeProps) => {
   const { palette } = useTheme();
   const [appliedTheme, setAppliedTheme] = useState<null | string>(null);
 

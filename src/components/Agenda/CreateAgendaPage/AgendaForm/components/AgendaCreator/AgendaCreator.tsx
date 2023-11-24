@@ -15,7 +15,11 @@ import HourGrid from './components/HourGrid/HourGrid';
 const displayedHours: string[] = ['Work hours (8:00 - 17:00)', 'All day (0:00 - 24:00)'];
 export type DisplayedHours = (typeof displayedHours)[number];
 
-const AgendaCreator = () => {
+type AgendaCreatorProps = {
+  isSaved: boolean;
+};
+
+const AgendaCreator = ({ isSaved }: AgendaCreatorProps) => {
   const dispatch = useDispatch();
   const { palette } = useTheme();
   const days: string[] = ['20.10.2023', '23.10.2023'];

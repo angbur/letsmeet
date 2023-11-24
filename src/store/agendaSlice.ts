@@ -6,7 +6,12 @@ export const visits = ['CONFERENCE', 'MEETING', 'EVENT', 'HACKATHON', 'WORKSHOP'
 
 type VisitType = (typeof visits)[number];
 
-type AgendaStatus = 'DRAFT' | 'PUBLISHED';
+export const AGENDA_STATUSES = {
+  PUBLISHED: 'PUBLISHED',
+  DRAFT: 'DRAFT',
+} as const;
+
+export type AgendaStatus = 'DRAFT' | 'PUBLISHED';
 
 export type Agenda = {
   id?: string;
@@ -72,7 +77,8 @@ const agendaSlice = createSlice({
       state.status = 'failed';
     });
     builder.addMatcher(agendaApi.endpoints.createAgenda.matchFulfilled, (state, { payload }) => {
-      state.agendas.push(payload.data);
+      state.agendas = [...state.agendas, payload.data];
+      state.editedAgenda = payload.data;
       state.status = 'idle';
     });
     builder.addMatcher(agendaApi.endpoints.getAgendaById.matchPending, (state) => {

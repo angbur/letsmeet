@@ -53,13 +53,13 @@ const AgendaList = ({ agendasList, recentAgendas }: AgendaListProps) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [agendaId, setAgendaId] = useState<string>('');
-  const { data, isSuccess, isLoading } = useGetAgendaByIdQuery(agendaId);
+  // const { data, isSuccess, isLoading } = useGetAgendaByIdQuery(agendaId);
 
   const handleDeleteAgenda = () => dispatch(openDialog('deleteAgenda'));
 
   const handleEditAgenda = (agendaId: string) => {
     setAgendaId(agendaId);
-    if (isSuccess) dispatch(updateNewAgenda(data));
+    // if (isSuccess) dispatch(updateNewAgenda(data));
   };
 
   const handleCopyLink = (link: string, agendaId: string) => {
@@ -76,7 +76,7 @@ const AgendaList = ({ agendasList, recentAgendas }: AgendaListProps) => {
 
   const userId = '1';
 
-  if (isSuccess) navigate('/new-agenda');
+  // if (isSuccess) navigate('/new-agenda');
 
   return (
     <div className="AgendaList" style={{ width: '100%' }}>
@@ -141,13 +141,13 @@ const AgendaList = ({ agendasList, recentAgendas }: AgendaListProps) => {
                   </span>
                 </TableCell>
                 <TableCell>
-                  {isLoading && agendaId === agenda.id ? (
+                  {/* {isLoading && agendaId === agenda.id ? (
                     <CircularProgress />
                   ) : (
                     <IconButton aria-label="edit" onClick={() => handleEditAgenda(agenda.id)}>
                       <ModeEditOutlineOutlinedIcon sx={{ color: 'black' }} />
                     </IconButton>
-                  )}
+                  )} */}
                   {agenda.status === 'DRAFT' ? (
                     <IconButton aria-label="delete" onClick={handleDeleteAgenda}>
                       <DeleteOutlineOutlinedIcon sx={{ color: 'black' }} />
