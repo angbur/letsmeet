@@ -37,11 +37,10 @@ export const agendaApi = createApi({
         body,
       }),
     }),
-    deleteAgenda: builder.mutation<{ data: Agenda }, Partial<Agenda>>({
-      query: (body) => ({
-        url: '/delete_agenda',
+    deleteAgenda: builder.mutation<{ data: Agenda }, string>({
+      query: (id) => ({
+        url: `/delete_agenda/${id}`,
         method: 'DELETE',
-        body,
       }),
     }),
     getAgendaById: builder.query<{ data: Agenda }, string>({

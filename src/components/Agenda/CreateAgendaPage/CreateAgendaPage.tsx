@@ -75,7 +75,9 @@ const CreateAgendaPage = () => {
     selectToastMsgCreateAgenda(resultCreate, resultUpdate);
   };
 
-  const handleDeleteAgenda = () => dispatch(openDialog('deleteAgenda'));
+  const handleDeleteAgenda = async () => {
+    dispatch(openDialog('deleteAgenda'));
+  };
 
   const handlePublishAgenda = async () => {
     const publishedAgenda = { ...draftAgenda, status: AGENDA_STATUSES.PUBLISHED };
@@ -118,7 +120,7 @@ const CreateAgendaPage = () => {
       >
         <Typography variant="h2">Create new agenda</Typography>
         <Box display="flex" sx={{ gap: '0.75rem' }}>
-          <Button variant="text" sx={{ padding: '0.75rem' }} onClick={handleDeleteAgenda}>
+          <Button disabled={!isSaved} variant="text" sx={{ padding: '0.75rem' }} onClick={handleDeleteAgenda}>
             Delete
           </Button>
           <Button variant="outlined" onClick={handlePublishAgenda}>
