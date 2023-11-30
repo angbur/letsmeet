@@ -3,21 +3,24 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
-
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { closeDialog } from '@store/dialogSlice';
-import { Agenda, AGENDA_STATUSES, selectEditedAgenda } from '@store/agendaSlice';
+import { selectEditedAgenda, setDefaultAgenda } from '@store/agendaSlice';
 import { useDeleteAgendaMutation } from '@services/agenda/agenda';
+import routes from '@components/App/routing/routes';
 
 const DeleteAgenda = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const handleClose = () => dispatch(closeDialog());
 
   const handleDeleteAgenda = () => {
     deleteAgenda(editedAgenda.id);
     handleClose();
+    dispatch(setDefaultAgenda());
+    navigate(routes.homepage);
   };
 
   const editedAgenda = useSelector(selectEditedAgenda);
