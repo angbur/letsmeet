@@ -2,21 +2,21 @@ import { useGetAllAgendasQuery } from '@services/agenda/agenda';
 import { Agenda } from '@store/agendaSlice';
 
 type AgendasListProps = {
-  numberOfAgendas: number;
+  numberOfAgendas?: number;
 };
 
-const useAgendasList = ({ numberOfAgendas }: AgendasListProps) => {
+const useAgendasList = ({ numberOfAgendas }: AgendasListProps = {}) => {
   const { data, error, isLoading } = useGetAllAgendasQuery();
   let agendasList: Agenda[] = [];
 
-  if (isAgendaList(data))
-    agendasList = [...data.data]
-      .sort((a, b) => {
-        if (a.last_updated > b.last_updated) return -1;
-        if (a.last_updated < b.last_updated) return 1;
-        return 0;
-      })
-      .slice(0, numberOfAgendas);
+  if (isAgendaList(data)) {
+    agendasList = [...data.data].sort((a, b) => {
+      if (a.last_updated > b.last_updated) return -1;
+      if (a.last_updated < b.last_updated) return 1;
+      return 0;
+    });
+    if (numberOfAgendas) agendasList = agendasList.slice(0, numberOfAgendas);
+  }
 
   return { agendasList, error, isLoading };
 };
