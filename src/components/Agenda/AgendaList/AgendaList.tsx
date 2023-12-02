@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { styled } from '@mui/material';
 import { Agenda, updateNewAgenda } from '@store/agendaSlice';
 import Table from '@mui/material/Table';
@@ -7,6 +7,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import TablePagination from '@mui/material/TablePagination';
 import Typography from '@mui/material/Typography';
 import Chip from '@mui/material/Chip';
 import IconButton from '@mui/material/IconButton';
@@ -43,17 +44,45 @@ const StyledChip = styled(Chip)({
 type AgendaListProps = {
   agendasList: Agenda[];
   recentAgendas?: boolean;
+  pagination?: boolean;
 };
 
 const defaultProps = {
   recentAgendas: false,
+  pagination: false,
 };
 
-const AgendaList = ({ agendasList, recentAgendas }: AgendaListProps) => {
+const rowsPerPageOptions = [5, 10, 25];
+
+const AgendaList = ({ agendasList, recentAgendas, pagination }: AgendaListProps) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [agendaId, setAgendaId] = useState<string>('');
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageOptions[0]);
+  const [visibleRows, setVisibleRows] = useState<Agenda[]>([]);
   // const { data, isSuccess, isLoading } = useGetAgendaByIdQuery(agendaId);
+
+  const getRowsOnPage = (rows: Agenda[], page: number, rowsPerPage: number) =>
+    rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+
+  useEffect(() => {
+    setVisibleRows(getRowsOnPage(agendasList, page, rowsPerPage));
+  }, [agendasList]);
+
+  const handlePageChange = (event: unknown, newPage: number) => {
+    setPage(newPage);
+    setVisibleRows(getRowsOnPage(agendasList, newPage, rowsPerPage));
+  };
+
+  const handleRowsPerPageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newRowsPerPage = parseInt(event.target.value, 10);
+    setRowsPerPage(newRowsPerPage);
+    setPage(0);
+    setVisibleRows(getRowsOnPage(agendasList, 0, newRowsPerPage));
+  };
+
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - agendasList.length) : 0;
 
   const handleDeleteAgenda = () => dispatch(openDialog('deleteAgenda'));
 
@@ -93,7 +122,7 @@ const AgendaList = ({ agendasList, recentAgendas }: AgendaListProps) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {agendasList.map((agenda: Agenda) => (
+            {visibleRows.map((agenda: Agenda) => (
               <TableRow key={agenda.id}>
                 <TableCell component="th" scope="row">
                   <Typography>{agenda.name}</Typography>
@@ -166,9 +195,29 @@ const AgendaList = ({ agendasList, recentAgendas }: AgendaListProps) => {
                 </TableCell>
               </TableRow>
             ))}
+            {emptyRows > 0 ? (
+              <TableRow
+                style={{
+                  height: 53 * emptyRows,
+                }}
+              >
+                <TableCell colSpan={3} />
+              </TableRow>
+            ) : null}
           </TableBody>
         </Table>
       </TableContainer>
+      {pagination ? (
+        <TablePagination
+          rowsPerPageOptions={rowsPerPageOptions}
+          component="div"
+          count={agendasList.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handlePageChange}
+          onRowsPerPageChange={handleRowsPerPageChange}
+        />
+      ) : null}
     </div>
   );
 };
