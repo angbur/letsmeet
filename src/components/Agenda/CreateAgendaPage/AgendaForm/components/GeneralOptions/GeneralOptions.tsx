@@ -22,7 +22,7 @@ const GeneralOptions = () => {
   const { palette } = useTheme();
   const visitsTypes = visits.map((visit) => visit.charAt(0).toUpperCase() + visit.slice(1));
   const [startDate, setStartDate] = useState<Moment | null>(moment(new Date()));
-  const [endDate, setEndDate] = useState<Moment | null>(moment(new Date()));
+  const [endDate, setEndDate] = useState<Moment | null>(moment(new Date()).add(1, 'd'));
   const [german, setGerman] = useState<boolean>(false);
   const [polish, setPolish] = useState<boolean>(false);
   const newAgenda = useSelector(selectEditedAgenda);
@@ -141,6 +141,7 @@ const GeneralOptions = () => {
               label="End date"
               format="DD/MM/YYYY"
               value={endDate}
+              minDate={moment(startDate).add(1, 'd')}
               onChange={(newValue) => setEndDate(newValue)}
             />
             <Typography variant="caption" color={palette.dark.main} py={0.5} px={2}>
