@@ -29,7 +29,7 @@ const getDatesArrayFromStartDateAndEndDate = (startDate: string, endDate: string
 
 const PreviewAgendaPage = ({ themeColor }: PreviewAgendaProps) => {
   const { id } = useParams();
-  const { data } = useGetAgendaByIdQuery(id);
+  const { data } = useGetAgendaByIdQuery(id ?? '1');
   const { palette } = useTheme();
   const primaryColor = themeColor ? themeColor : palette.primary.main;
   const days: string[] = data
