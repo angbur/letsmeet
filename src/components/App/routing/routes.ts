@@ -27,4 +27,5 @@ const routes: RoutesData = {
   viewCreatedAgenda: '/agenda-view/:id',
 };
 
+
 export default routes;

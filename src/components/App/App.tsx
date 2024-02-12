@@ -1,8 +1,8 @@
-import React, { Suspense } from 'react';
+import React, { useEffect } from 'react';
 import { Fragment } from 'react';
 import Header from '@components/Header/Header';
 import Box from '@mui/material/Box';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import routes from './routing/routes';
 import HomePage from '@components/HomePage/HomePage';
 import CreateAgendaPage from '@components/Agenda/CreateAgendaPage/CreateAgendaPage';
@@ -11,9 +11,6 @@ import MyAgendasPage from '@components/Agenda/MyAgendasPage/MyAgendasPage';
 import PreviewAgendaPage from '@components/Agenda/PreviewAgendaPage/PreviewAgendaPage';
 import MainDialog from '@components/Dialog/MainDialog';
 import Toast from '@components/Toast/Toast';
-import CircularProgress from '@mui/material/CircularProgress';
-
-const AsyncAgendaView = React.lazy(() => import('@components/Agenda/PreviewAgendaPage/PreviewAgendaPage'));
 
 const App = () => {
   const location = useLocation();
@@ -71,14 +68,7 @@ const App = () => {
           <Route path={routes.myAgendas} element={<MyAgendasPage />}></Route>
           <Route path={routes.allAgendas} element={<AllAgendasPage />}></Route>
           <Route path={routes.previewAgenda} element={<PreviewAgendaPage themeColor={setThemeColor(theme)} />}></Route>
-          <Route
-            path={routes.viewCreatedAgenda}
-            element={
-              <Suspense fallback={<CircularProgress />}>
-                <AsyncAgendaView />
-              </Suspense>
-            }
-          ></Route>
+          <Route path={routes.viewCreatedAgenda} static element={<PreviewAgendaPage themeColor={setThemeColor(theme)} />}></Route>
           <Route path="*" element={<HomePage />}></Route>
         </Routes>
       </Box>
