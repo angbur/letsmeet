@@ -99,9 +99,11 @@ const PreviewTimeblock = ({ timeblock, themeColor }: TimeblockProps) => {
             </Box>
           </StyledAccordionSummary>
           <AccordionDetails sx={{ padding: 0 }}>
-            <Typography variant="caption" color="dark">
-              <strong>Presenter</strong>: {timeblock.presenter_id}
-            </Typography>
+            {timeblock.presenter_id ? (
+              <Typography variant="caption" color="dark">
+                <strong>Presenter</strong>: {timeblock.presenter_id}
+              </Typography>
+            ) : null}
             <Box display="flex" flexDirection="column">
               <Typography variant="caption" color="dark">
                 <strong>Description</strong>
