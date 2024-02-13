@@ -7,6 +7,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import CircularProgress from '@mui/material/CircularProgress';
 import PreviewTimeblock from './components/PreviewTimeblock/PreviewTimeblock';
 import { firstDay, secondDay } from './mockTimeblocks';
 import { useParams } from 'react-router-dom';
@@ -39,6 +40,8 @@ const PreviewAgendaPage = () => {
   const [tab, setTab] = useState(days[0]);
 
   const handleChangeTab = (event: React.SyntheticEvent, newValue: string) => setTab(newValue);
+
+  if (!data) return <CircularProgress />;
 
   const StyledTabs = styled(Tabs)({
     '& .MuiTabs-flexContainer ': {
