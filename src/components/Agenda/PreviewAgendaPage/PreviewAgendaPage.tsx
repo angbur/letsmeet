@@ -7,9 +7,10 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import CircularProgress from '@mui/material/CircularProgress';
 import PreviewTimeblock from './components/PreviewTimeblock/PreviewTimeblock';
 import { firstDay, secondDay } from './mockTimeblocks';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useGetAgendaByIdQuery } from '@services/agenda/agenda';
 import moment from 'moment';
 
@@ -29,7 +30,9 @@ const getDatesArrayFromStartDateAndEndDate = (startDate: string, endDate: string
 
 const PreviewAgendaPage = () => {
   const themeColor = useTheme().palette.primary.main;
-  const { id } = useParams();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const id = queryParams.get('id');
   const { data } = useGetAgendaByIdQuery(id ?? '1');
   const { palette } = useTheme();
   const primaryColor = themeColor ? themeColor : palette.primary.main;
@@ -39,6 +42,8 @@ const PreviewAgendaPage = () => {
   const [tab, setTab] = useState(days[0]);
 
   const handleChangeTab = (event: React.SyntheticEvent, newValue: string) => setTab(newValue);
+
+  if (!data) return <CircularProgress />;
 
   const StyledTabs = styled(Tabs)({
     '& .MuiTabs-flexContainer ': {

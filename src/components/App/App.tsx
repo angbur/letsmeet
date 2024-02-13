@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Fragment } from 'react';
 import Header from '@components/Header/Header';
 import Box from '@mui/material/Box';
@@ -49,24 +49,6 @@ const App = () => {
     }
   };
 
-  const router = createBrowserRouter([
-    {
-      path: "/", element: <HomePage />,
-    },
-    {
-      path: "/new-agenda", element: <CreateAgendaPage />,
-    },
-    {
-      path: "/my-agendas", element: <MyAgendasPage />,
-    },
-    {
-      path: "/all-agendas", element: <AllAgendasPage />,
-    },
-    {
-      path: "/preview-agenda", element: <PreviewAgendaPage themeColor={setThemeColor(theme)} />,
-    },
-  ]);
-
   return (
     <Fragment>
       <MainDialog />
@@ -80,14 +62,12 @@ const App = () => {
         width={'100%'}
         sx={{ backgroundImage: setBackgroundImage(theme) }}
       >
-        <Outlet/>
         <Routes>
           <Route path={routes.homepage} element={<HomePage />}></Route>
-          <Route path={routes.viewCreatedAgenda} index element={<PreviewAgendaPage />}></Route>
+          <Route path={routes.previewAgenda} element={<PreviewAgendaPage />}></Route>
           <Route path={routes.newAgenda} element={<CreateAgendaPage />}></Route>
           <Route path={routes.myAgendas} element={<MyAgendasPage />}></Route>
           <Route path={routes.allAgendas} element={<AllAgendasPage />}></Route>
-          <Route path={routes.previewAgenda} element={<PreviewAgendaPage />}></Route>
           <Route path="*" element={<HomePage />}></Route>
         </Routes>
       </Box>

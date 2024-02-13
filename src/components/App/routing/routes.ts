@@ -1,14 +1,18 @@
-import { createBrowserRouter } from "react-router-dom";
-
 const routeFeature = [
   'homepage',
   'newAgenda',
   'myAgendas',
   'allAgendas',
-  'previewAgenda',
-  'viewCreatedAgenda',
+  'previewAgenda'
 ] as const;
-const routesUrl = ['/', '/new-agenda', '/my-agendas', '/all-agendas', '/preview-agenda', '/agenda-view/:id'] as const;
+const routesUrl = [
+  '/',
+  '/new-agenda',
+  '/my-agendas',
+  '/agenda-view',
+  '/all-agendas',
+  '/preview-agenda'
+] as const;
 
 type RouteFeature = (typeof routeFeature)[number];
 export type RoutesUrl = (typeof routesUrl)[number];
@@ -25,8 +29,7 @@ const routes: RoutesData = {
   newAgenda: '/new-agenda',
   myAgendas: '/my-agendas',
   allAgendas: '/all-agendas',
-  previewAgenda: '/preview-agenda',
-  viewCreatedAgenda: '/agenda-view/:id',
+  previewAgenda: '/agenda-view'
 };
 
 export default routes;
