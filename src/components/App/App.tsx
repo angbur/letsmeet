@@ -18,10 +18,6 @@ const App = () => {
   const theme = queryParams.get('theme');
   const isPreview = location.pathname.includes('preview');
   const isAgendaView = location.pathname.includes('agenda-view');
-  const agendaId = location.pathname.split('/').pop();
-  const navigate = useNavigate();
-
-  if (isAgendaView && !agendaId) navigate(routes.previewAgenda);
 
   const setBackgroundImage = (theme) => {
     if (!isPreview && !isAgendaView) {
