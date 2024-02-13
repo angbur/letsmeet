@@ -41,7 +41,7 @@ const App = () => {
       case 'professional':
         return '#0B1AA1';
       case 'party':
-        return '#6750A4';
+        return '#415F91';
       case 'sky':
         return '#365E9F';
       default:

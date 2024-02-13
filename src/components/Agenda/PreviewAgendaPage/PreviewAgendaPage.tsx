@@ -105,7 +105,7 @@ const PreviewAgendaPage = ({ themeColor }: PreviewAgendaProps) => {
         <Divider />
       </Box>
       {(tab === '21.10.2023' ? firstDay : secondDay).map((timeblock) => (
-        <PreviewTimeblock key={timeblock.id} timeblock={timeblock} themeColor={'primary'} />
+        <PreviewTimeblock key={timeblock.id} timeblock={timeblock} themeColor={primaryColor} />
       ))}
     </Box>
   );
