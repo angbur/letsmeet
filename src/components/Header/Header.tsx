@@ -6,13 +6,19 @@ import { IconButton } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const { palette } = useTheme();
   const navigate = useNavigate();
+  const location = useLocation();
+  const isAgendaPreview = location.pathname.includes('agenda-view');
 
-  const handleHomePage = () => navigate('/');
+  const handleHomePage = () => {
+    if (!isAgendaPreview) {
+      navigate('/');
+    }
+  };
 
   return (
     <AppBar position="static" sx={{ backgroundColor: palette.secondary.light }} elevation={0}>

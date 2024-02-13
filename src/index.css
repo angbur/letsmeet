@@ -19,3 +19,7 @@ body {
   width: 100%;
   background: #fff;
 }
+
+  .css-1r4a9lq-MuiButtonBase-root-MuiIconButton-root {
+    top: 0 !important;
+  }

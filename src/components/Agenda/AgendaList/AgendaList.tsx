@@ -100,7 +100,7 @@ const AgendaList = ({ agendasList, recentAgendas, pagination }: AgendaListProps)
 
   const handlePreview = (link: string, agendaId: string) => {
     //window.open(link, '_blank');
-    navigate(`/agenda-view/${agendaId}`);
+    navigate(`/agenda-view?id=${agendaId}`);
   };
 
   const userId = '1';
