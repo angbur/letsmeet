@@ -65,7 +65,6 @@ const App = () => {
         <Routes>
           <Route path={routes.homepage} element={<HomePage />}></Route>
           <Route path={routes.previewAgenda} element={<PreviewAgendaPage />}></Route>
-          <Route path={routes.viewCreatedAgenda} element={<PreviewAgendaPage />}></Route>
           <Route path={routes.newAgenda} element={<CreateAgendaPage />}></Route>
           <Route path={routes.myAgendas} element={<MyAgendasPage />}></Route>
           <Route path={routes.allAgendas} element={<AllAgendasPage />}></Route>

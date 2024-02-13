@@ -3,8 +3,7 @@ const routeFeature = [
   'newAgenda',
   'myAgendas',
   'allAgendas',
-  'previewAgenda',
-  'viewCreatedAgenda',
+  'previewAgenda'
 ] as const;
 const routesUrl = [
   '/',
@@ -12,8 +11,7 @@ const routesUrl = [
   '/my-agendas',
   '/agenda-view',
   '/all-agendas',
-  '/preview-agenda',
-  '/agenda-view/:id',
+  '/preview-agenda'
 ] as const;
 
 type RouteFeature = (typeof routeFeature)[number];
@@ -31,8 +29,7 @@ const routes: RoutesData = {
   newAgenda: '/new-agenda',
   myAgendas: '/my-agendas',
   allAgendas: '/all-agendas',
-  previewAgenda: '/agenda-view',
-  viewCreatedAgenda: '/agenda-view/:id',
+  previewAgenda: '/agenda-view'
 };
 
 export default routes;
