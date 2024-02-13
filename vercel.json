@@ -1,5 +1,8 @@
 {
     "rewrites": [
-      { "source": "/agenda-view/*", "destination": "/" }
+      {
+        "source": "/(.*)",
+        "destination": "/index.html"
+      }
     ]
   }
