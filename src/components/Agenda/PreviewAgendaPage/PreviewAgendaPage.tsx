@@ -27,7 +27,8 @@ const getDatesArrayFromStartDateAndEndDate = (startDate: string, endDate: string
   return dates;
 };
 
-const PreviewAgendaPage = ({ themeColor }: PreviewAgendaProps) => {
+const PreviewAgendaPage = () => {
+  const themeColor = useTheme().palette.primary.main;
   const { id } = useParams();
   const { data } = useGetAgendaByIdQuery(id ?? '1');
   const { palette } = useTheme();
