@@ -8,6 +8,9 @@ export const parseDate = (date: string): string => {
 };
 
 export const parseLastUpdatedDate = (date: string): string => {
+  if(!date){
+    return ''
+  }
   const newDate = new Date(date);
   return `${addZeroToDate(newDate.getDate())}.${
     newDate.getMonth() + 1
@@ -16,9 +19,9 @@ export const parseLastUpdatedDate = (date: string): string => {
 
 export const calculateDaysLeft = (date: string): string => {
   const startDate = new Date(date);
-  const diffTime = Math.abs(startDate.getTime() - new Date().getTime());
+  const diffTime = (startDate.getTime() - new Date().getTime());
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  return `${diffDays} day${diffDays !== 1 ? 's' : ''} left`;
+  return `${Math.abs(diffDays)} day${diffDays !== 1 ? 's' : ''} ${diffDays >=0 ? 'left' : 'ago'}`;
 };
 
 export const getRole = (userId: string, owner_id: string, coowners_id: string[]): string => {
